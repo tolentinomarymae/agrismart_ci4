@@ -1,0 +1,14 @@
+CRITICAL - 2023-11-19 13:11:01 --> Invalid file: "/landing_page_inc/header.php"
+in SYSTEMPATH\Exceptions\FrameworkException.php on line 39.
+ 1 SYSTEMPATH\View\View.php(216): CodeIgniter\Exceptions\FrameworkException::forInvalidFile('/landing_page_inc/header.php')
+ 2 SYSTEMPATH\View\View.php(469): CodeIgniter\View\View->render('/landing_page_inc/header', null, true)
+ 3 APPPATH\Views\index.php(3): CodeIgniter\View\View->include('/landing_page_inc/header')
+ 4 SYSTEMPATH\View\View.php(228): include('C:\\laragon\\www\\agrismart_ci4\\app\\Views\\index.php')
+ 5 SYSTEMPATH\View\View.php(231): CodeIgniter\View\View->CodeIgniter\View\{closure}()
+ 6 SYSTEMPATH\Common.php(1190): CodeIgniter\View\View->render('index', [], true)
+ 7 APPPATH\Controllers\LandingpageController.php(11): view('index')
+ 8 SYSTEMPATH\CodeIgniter.php(942): App\Controllers\LandingpageController->index()
+ 9 SYSTEMPATH\CodeIgniter.php(502): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\LandingpageController))
+10 SYSTEMPATH\CodeIgniter.php(361): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+11 FCPATH\index.php(79): CodeIgniter\CodeIgniter->run()
+12 SYSTEMPATH\Commands\Server\rewrite.php(47): require_once('C:\\laragon\\www\\agrismart_ci4\\public\\index.php')
