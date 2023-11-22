@@ -19,7 +19,6 @@
 								<li class="current-list-item"><a href="/">Home</a>
 									
 								</li>
-								<li><a href="/shop">Shop</a></li>
 								<li><a href="#">About</a>
 									
 								</li>
@@ -32,7 +31,6 @@
 								</li>
 								<li>
 									<div class="header-icons">
-										<a class="shopping-cart" href="#"><i class="fas fa-shopping-cart"></i></a>
 										<a class="mobile-hide search-bar-icon" href="#"><i class="fas fa-search"></i></a>
 									</div>
 								</li>
