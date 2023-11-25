@@ -19,20 +19,17 @@
 								<li class="current-list-item"><a href="/">Home</a>
 									
 								</li>
-								<li><a href="#">About</a>
+								<li><a href="#about">About</a>
 									
 								</li>
-								<li><a href="#">Contact</a>
+								<li><a href="#contact">Contact</a>
 									
 								</li>
-								<li><a href="/login">Login</a></li>
-								<li><a href="/register">Register</a>
+								<li><a href="/sign_ins">Login</a></li>
+								<li><a href="/registerview">Register</a>
 									
 								</li>
 								<li>
-									<div class="header-icons">
-										<a class="mobile-hide search-bar-icon" href="#"><i class="fas fa-search"></i></a>
-									</div>
 								</li>
 							</ul>
 						</nav>

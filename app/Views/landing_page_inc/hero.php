@@ -29,8 +29,8 @@
 							<h1 >AgriSmart</h1>
                             <p class="subtitle" ">Ang susi sa maunlad na pagsasaka!</p>
 							<div class="hero-btns">
-								<a href="" class="boxed-btn">Magsimula</a>
-								<a href="" class="bordered-btn">Contact Us</a>
+								<a href="/sign_ins" class="boxed-btn">Magsimula</a>
+								<a href="#contact" class="bordered-btn">Contact Us</a>
 							</div>
 						</div>
 					</div>

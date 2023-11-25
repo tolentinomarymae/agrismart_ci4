@@ -1,6 +1,6 @@
 
 	<!-- footer -->
-	<div class="footer-area">
+	<div class="footer-area" id="contact">
 		<div class="container">
 			<div class="row">
 				<div class="col-lg-3 col-md-6">
@@ -25,8 +25,8 @@
 						<ul>
 							<li><a href="">Home</a></li>
 							<li><a href="">About</a></li>
-							<li><a href="">Register</a></li>
-							<li><a href="">Log In</a></li>
+							<li><a href="/registerview">Register</a></li>
+							<li><a href="/logins">Log In</a></li>
 							<li><a href="">Contact</a></li>
 						</ul>
 					</div>

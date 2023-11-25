@@ -16,16 +16,19 @@
                             </form>
                         </div>
                     </div>
-                   
+                    <div class="header_right d-flex justify-content-between align-items-center">
+                        <div class="header_notification_warp d-flex align-items-center">
+                            
+                        </div>
                     
-                        <div class="profile_info" style="align-self: center; margin-right: 20px;">
-                        <i class="fa-solid fa-user fa-2xl" style="color: #88c431;"></i>                          
+                        <div class="profile_info">
+                        <i class="fa-solid fa-user fa-2xl " style="align-self: center; color: #88c431; margin-right: 20px;" ></i>                          
                           <div class="profile_info_iner">
                                 <h5>Famer</h5>
                                 <div class="profile_info_details">
-                                    <a href="#">My Profile <i class="fa-regular fa-user" style="color: #ffffff;"></i></a>
-                                    <a href="#">Settings <i class="fa-solid fa-gear" style="color: #ffffff;"></i></i></a>
-                                    <a href="/">Log Out <i class="fa-solid fa-arrow-right-from-bracket" style="color: #ffffff;"></i></a>
+                                    <a href="#">My Profile <i class="fa-regular fa-user" style="color: white;"></i></a>
+                                    <a href="#">Settings <i class="fa-solid fa-gear" style="color: white;"></i></i></a>
+                                    <a href="/">Log Out <i class="fa-solid fa-arrow-right-from-bracket" style="color: white;"></i></a>
                                 </div>
                             </div>
                         </div>
