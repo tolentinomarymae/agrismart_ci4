@@ -1,0 +1,16 @@
+CRITICAL - 2023-12-07 16:18:29 --> Undefined variable $crop
+in APPPATH\Views\dashboard\main-croprotation.php on line 40.
+ 1 APPPATH\Views\dashboard\main-croprotation.php(40): CodeIgniter\Debug\Exceptions->errorHandler(2, 'Undefined variable $crop', 'C:\\laragon\\www\\agrismart_ci4\\app\\Views\\dashboard\\main-croprotation.php', 40)
+ 2 SYSTEMPATH\View\View.php(228): include('C:\\laragon\\www\\agrismart_ci4\\app\\Views\\dashboard\\main-croprotation.php')
+ 3 SYSTEMPATH\View\View.php(231): CodeIgniter\View\View->CodeIgniter\View\{closure}()
+ 4 SYSTEMPATH\View\View.php(469): CodeIgniter\View\View->render('/dashboard/main-croprotation', null, true)
+ 5 APPPATH\Views\userfolder\croprotation.php(6): CodeIgniter\View\View->include('/dashboard/main-croprotation')
+ 6 SYSTEMPATH\View\View.php(228): include('C:\\laragon\\www\\agrismart_ci4\\app\\Views\\userfolder\\croprotation.php')
+ 7 SYSTEMPATH\View\View.php(231): CodeIgniter\View\View->CodeIgniter\View\{closure}()
+ 8 SYSTEMPATH\Common.php(1190): CodeIgniter\View\View->render('userfolder/croprotation', [], true)
+ 9 APPPATH\Controllers\DashboardController.php(176): view('userfolder/croprotation', [...])
+10 SYSTEMPATH\CodeIgniter.php(942): App\Controllers\DashboardController->addnewrotation()
+11 SYSTEMPATH\CodeIgniter.php(502): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\DashboardController))
+12 SYSTEMPATH\CodeIgniter.php(361): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+13 FCPATH\index.php(79): CodeIgniter\CodeIgniter->run()
+14 SYSTEMPATH\Commands\Server\rewrite.php(47): require_once('C:\\laragon\\www\\agrismart_ci4\\public\\index.php')

@@ -1,21 +1,22 @@
 <?php
 
 namespace App\Controllers;
+
 use App\Models\RegisterModel;
 use App\Controllers\BaseController;
 
 class LoginController extends BaseController
 {
-   
-    
+
+
     public function dashboards()
-    {if(!session()->get('isLoggedIn')){
-        return redirect()->to('/sign_ins');
-    }
-    else{
-        
-        return view ('userfolder/dashboard');
-    }
+    {
+        if (!session()->get('isLoggedIn')) {
+            return redirect()->to('/sign_ins');
+        } else {
+
+            return view('userfolder/dashboard');
+        }
     }
     public function register()
     {
@@ -46,13 +47,13 @@ class LoginController extends BaseController
             dd($registermodel->save($data));
 
             return redirect()->to('/sign_ins');
-
         } else {
             $data['validation'] = $this->validator;
             return view('signin-signup/register', $data);
         }
     }
-    public function loginauth(){
+    public function loginauth()
+    {
         $session = session();
         $registermodel = new RegisterModel();
         $farmer_name = $this->request->getVar('farmer_name');
@@ -61,14 +62,14 @@ class LoginController extends BaseController
 
         $data = $registermodel->where('farmer_name', $farmer_name)->first();
 
-        if($data){
+        if ($data) {
             $pass = $data['password'];
             $authenticatePassword = password_verify($password, $pass);
 
-            if ($authenticatePassword){
+            if ($authenticatePassword) {
                 $ses_data = [
                     'farmer_id' => $data['farmer_id'],
-                    'farmer_name'=> $data['farmer_name'],
+                    'farmer_name' => $data['farmer_name'],
                     'isLoggedIn' => TRUE,
                     'usertype' => $data['usertype'],
 
@@ -76,56 +77,37 @@ class LoginController extends BaseController
 
                 $session->set($ses_data);
 
-                if($data['usertype'] === 'admin'){
+                if ($data['usertype'] === 'Admin') {
                     return redirect()->to('/admindashboard');
-                } 
-                else if($data['usertype'] === 'farmer'){
+                } else if ($data['usertype'] === 'Farmer') {
                     return redirect()->to('/dashboards');
                 }
-            }else{
+            } else {
                 $session->setFlashdata('msg', 'Name or Password is incorrect.');
 
                 return redirect()->to('/sign_ins');
             }
         }
     }
-    public function login(){
+    public function login()
+    {
         session()->remove(['farmer_id', 'farmer_name', 'idnumber', 'isLoggedIn', 'usertype']);
         helper(['form']);
         return view('signin-signup/login');
     }
-    public function registerview(){
+    public function registerview()
+    {
         helper(['form']);
-        $data=[];
+        $data = [];
         return view('signin-signup/register', $data);
     }
-    public function admindashboard(){
-        if(!session()->get('isLoggedIn')){
+    public function admindashboard()
+    {
+        if (!session()->get('isLoggedIn')) {
             return redirect()->to('/sign_ins');
-        }
-        else{
-            
+        } else {
+
             return view('adminfolder/dashboard');
-        }
-    }
-     public function croprotation()
-    {
-        if(!session()->get('isLoggedIn')){
-            return redirect()->to('/sign_ins');
-        }
-        else{
-            
-            return view ('userfolder/croprotation');
-        }
-    }
-    public function jobs()
-    {
-        if(!session()->get('isLoggedIn')){
-            return redirect()->to('/sign_ins');
-        }
-        else{
-            
-            return view ('userfolder/jobs');
         }
     }
 }
