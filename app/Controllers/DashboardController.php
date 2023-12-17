@@ -50,8 +50,13 @@ class DashboardController extends BaseController
 
     public function viewfields()
     {
+        if (!session()->get('isLoggedIn')) {
+            return redirect()->to('/logins');
+        }
+        $userId = session()->get('farmer_id');
+
         $data = [
-            'field' => $this->field->findAll()
+            'field' => $this->field->where('user_id', $userId)->findAll()
         ];
         return view('userfolder/viewfields', $data);
     }
@@ -83,12 +88,6 @@ class DashboardController extends BaseController
         // Redirect to a success page or display a success message
         return redirect()->to('/viewfields')->with('success', 'Field added successfully');
     }
-    public function add()
-    {
-        // Load the form view
-        return view('field/add');
-    }
-
 
     public function edit($field_id)
     {
@@ -144,11 +143,12 @@ class DashboardController extends BaseController
     //crop planting
     public function cropplanting()
     {
+        $userId = session()->get('farmer_id');
         if (!session()->get('isLoggedIn')) {
             return redirect()->to('/sign_ins');
         } else {
             $data = [
-                'planting' => $this->planting->findAll()
+                'planting' => $this->planting->where('user_id', $userId)->findAll()
             ];
             return view('userfolder/cropplanting', $data);
         }
@@ -157,7 +157,6 @@ class DashboardController extends BaseController
     {
         $userId = session()->get('farmer_id');
 
-        // Validate the form data
         $validation = $this->validate([
             'field_name' => 'required',
             'crop_variety' => 'required',
@@ -179,30 +178,67 @@ class DashboardController extends BaseController
             'user_id' => $userId,
         ]);
 
-        // Redirect to a success page or display a success message
         return redirect()->to('/cropplanting')->with('success', 'Field added successfully');
+    }
+
+    public function editplanting($planting_id)
+    {
+        $planting = $this->planting->find($planting_id);
+
+        return view('planting', ['planting' => $planting]);
+    }
+    public function updateplanting()
+    {
+
+        $planting_id = $this->request->getPost('planting_id');
+
+        // Define the data to be updated
+        $dataToUpdate = [
+            'field_name' => $this->request->getPost('field_name'),
+            'crop_variety' => $this->request->getPost('crop_variety'),
+            'planting_date' => $this->request->getPost('planting_date'),
+            'season' => $this->request->getPost('season'),
+            'start_date' => $this->request->getPost('start_date'),
+            'end_date' => $this->request->getPost('end_date'),
+            'notes' => $this->request->getPost('notes'),
+        ];
+
+        // Update the product in the database using the update() method
+        $this->planting->update($planting_id, $dataToUpdate);
+
+        // Redirect back to the product list or a success page
+        return redirect()->to('/cropplanting')->with('success', 'Field updated successfully');
+    }
+    public function deleteplanting($planting_id)
+    {
+
+        $planting = $this->planting->find($planting_id);
+
+        if ($planting) {
+            $this->planting->delete($planting_id);
+            return redirect()->to('/cropplanting')->with('success', 'field deleted successfully');
+        } else {
+            return redirect()->to('/cropplanting')->with('error', 'field not found');
+        }
     }
 
     //jobs
 
     public function jobs()
     {
+        $userId = session()->get('farmer_id');
         if (!session()->get('isLoggedIn')) {
             return redirect()->to('/sign_ins');
         } else {
             $data = [
-                'jobs' => $this->jobs->findAll()
+                'jobs' => $this->jobs->where('user_id', $userId)->findAll()
             ];
             return view('userfolder/jobs', $data);
         }
     }
     public function addnewjob()
     {
-
-        // Create a new instance of your model
-        $model = new JobsModel();
-
-        // Validate the form data
+        $userId = session()->get('farmer_id');
         $validation = $this->validate([
             'job_name' => 'required',
             'field_name' => 'required',
@@ -215,12 +251,10 @@ class DashboardController extends BaseController
         ]);
 
         if (!$validation) {
-            // Validation failed, return to the form with errors
             return view('userfolder/jobs', ['validation' => $this->validator]);
         }
 
-        // If validation passes, insert the data into the database
-        $model->save([
+        $this->jobs->save([
             'job_name' => $this->request->getPost('job_name'),
             'field_name' => $this->request->getPost('field_name'),
             'finished_date' => $this->request->getPost('finished_date'),
@@ -229,28 +263,24 @@ class DashboardController extends BaseController
             'quantity_use' => $this->request->getPost('quantity_use'),
             'total_money_spent' => $this->request->getPost('total_money_spent'),
             'notes' => $this->request->getPost('notes'),
+            'user_id' => $userId,
         ]);
 
-        // Redirect to a success page or display a success message
         return redirect()->to('/jobs')->with('success', 'Job added successfully');
     }
 
 
     public function editjob($job_id)
     {
-        // Load the product to be edited from the database
         $model = new JobsModel();
         $jobs = $model->find($job_id);
 
-        // Load the edit view with the product data
         return view('jobs', ['jobs' => $jobs]);
     }
     public function updatejob()
     {
-        // Handle the form submission to update the product
         $model = new JobsModel();
 
-        // Retrieve the field_id from the form input
         $job_id = $this->request->getPost('job_id');
 
         // Define the data to be updated
@@ -265,28 +295,20 @@ class DashboardController extends BaseController
             'notes' => $this->request->getPost('notes'),
         ];
 
-        // Update the product in the database using the update() method
         $model->update($job_id, $dataToUpdate);
 
-        // Redirect back to the product list or a success page
         return redirect()->to('/jobs')->with('success', 'Job updated successfully');
     }
     public function deleteJob($job_id)
     {
-        // Load the model
         $model = new JobsModel();
 
-        // Check if the product with the given field_ID exists
         $jobs = $model->find($job_id);
 
         if ($jobs) {
-            // Delete the jobs from the database
             $model->delete($job_id);
-
-            // Redirect back to the jobs list with a success message
             return redirect()->to('/jobs')->with('success', 'jobs deleted successfully');
         } else {
-            // Redirect back to the jobs list with an error message if the jobs doesn't exist
             return redirect()->to('/jobs')->with('error', 'jobs not found');
         }
     }
@@ -295,18 +317,17 @@ class DashboardController extends BaseController
 
     public function harvest()
     {
+        $userId = session()->get('farmer_id');
+
         $data = [
-            'harvest' => $this->harvest->findAll()
+            'harvest' => $this->harvest->where('user_id', $userId)->findAll()
         ];
         return view('userfolder/harvest', $data);
     }
     public function addnewharvest()
     {
+        $userId = session()->get('farmer_id');
 
-        // Create a new instance of your model
-        $model = new HarvestModel();
-
-        // Validate the form data
         $validation = $this->validate([
             'field_name' => 'required',
             'variety_name' => 'required',
@@ -317,18 +338,17 @@ class DashboardController extends BaseController
         ]);
 
         if (!$validation) {
-            // Validation failed, return to the form with errors
             return view('userfolder/harvest', ['validation' => $this->validator]);
         }
 
-        // If validation passes, insert the data into the database
-        $model->save([
+        $this->harvest->save([
             'field_name' => $this->request->getPost('field_name'),
             'variety_name' => $this->request->getPost('variety_name'),
             'harvest_quantity' => $this->request->getPost('harvest_quantity'),
             'total_revenue' => $this->request->getPost('total_revenue'),
             'harvest_date' => $this->request->getPost('harvest_date'),
             'notes' => $this->request->getPost('notes'),
+            'user_id' => $userId,
         ]);
 
         // Redirect to a success page or display a success message

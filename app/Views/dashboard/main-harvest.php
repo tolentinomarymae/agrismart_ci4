@@ -16,9 +16,6 @@
                                     </form>
                                 </div>
                             </div>
-                            <div class="add_button ms-2">
-                                <a href="#" data-bs-toggle="modal" data-bs-target="#addharvestmodal" class="btn_1">Add New</a>
-                            </div>
                         </div>
                     </div>
                     <div class="table-responsive">

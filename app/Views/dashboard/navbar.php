@@ -41,9 +41,6 @@
             </a>
             <ul>
                 <li><a href="/cropplanting">Crop Planting</a></li>
-                <li><a href=""> • By Fields</a></li>
-                <li><a href=""> • By Season</a></li>
-                <li><a href=""> • By Variety of Crop</a></li>
             </ul>
         </li>
         <li class>
@@ -53,10 +50,6 @@
             </a>
             <ul>
                 <li><a href="/jobs">Jobs</a></li>
-                <li><a href="">• Spray</a></li>
-                <li><a href="">• Fertilize</a></li>
-                <li><a href="">• Lipat Tanim</a></li>
-                <li><a href="">• Gamas</a></li>
             </ul>
         </li>
         <li class>

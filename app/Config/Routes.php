@@ -25,6 +25,9 @@ $routes->post('viewfields/delete/(:num)', 'DashboardController::deleteProduct/$1
 // crop planting
 $routes->get('/cropplanting', 'DashboardController::cropplanting');
 $routes->post('/addplanting', 'DashboardController::addnewplanting');
+$routes->post('/cropplanting/edit/(:num)', 'DashboardController::editplanting/$1');
+$routes->post('/cropplanting/update', 'DashboardController::updateplanting');
+$routes->post('cropplanting/delete/(:num)', 'DashboardController::deleteplanting/$1');
 
 //jobs
 $routes->get('/jobs', 'DashboardController::jobs', ['filter' => 'authGuard']);

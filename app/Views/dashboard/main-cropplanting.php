@@ -4,7 +4,7 @@
             <div class="col-12">
                 <div class="QA_section">
                     <div class="white_box_tittle list_header">
-                        <h4 style="color:#88c431">Mga Bukid</h4>
+                        <h4 style="color:#88c431">Crop Planting</h4>
                         <div class=" box_right d-flex lms_block">
                             <div class="serach_field_2">
                                 <div class="search_inner">
@@ -15,9 +15,6 @@
                                         <button type="submit"> <i class="ti-search"></i> </button>
                                     </form>
                                 </div>
-                            </div>
-                            <div class="add_button ms-2">
-                                <a href="#" data-bs-toggle="modal" data-bs-target="#addplantingmodal" class="btn_1">Add New</a>
                             </div>
                         </div>
                     </div>
@@ -47,21 +44,29 @@
                                         <td><?= $pla['end_date'] ?></td>
                                         <td><?= $pla['notes'] ?></td>
                                         <td>
-                                            <button type="button" class="btn btn-primary" onclick="openEditFieldModal(
-                                            <?= $pla['planting_id']; ?>,
-                                            '<?= $pla['field_name']; ?>',
-                                            '<?= $pla['crop_variety']; ?>',
-                                            '<?= $pla['planting_date']; ?>',
-                                            '<?= $pla['season']; ?>',
-                                            '<?= $pla['start_date']; ?>',
-                                            '<?= $pla['end_date']; ?>',
-                                            '<?= $pla['notes']; ?>',
-                                            )">Edit</button>
-                                            <button type="button" class="btn btn-danger" onclick="deleteProduct(<?= $pla['planting_id']; ?>)">Delete</button>
+                                            <div class="btn-group">
+                                                <button type="button" class="btn btn-secondary dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" style="background-color: #88c431; border: none;">
+                                                    Actions
+                                                </button>
+                                                <div class="dropdown-menu">
+                                                    <button class="dropdown-item" onclick="openEditPlantingModal(
+                                                        <?= $pla['planting_id']; ?>,
+                                                        '<?= $pla['field_name']; ?>',
+                                                        '<?= $pla['crop_variety']; ?>',
+                                                        '<?= $pla['planting_date']; ?>',
+                                                        '<?= $pla['season']; ?>',
+                                                        '<?= $pla['start_date']; ?>',
+                                                        '<?= $pla['end_date']; ?>',
+                                                        '<?= $pla['notes']; ?>',
+                                                        )">Edit</button>
+                                                    <button class="dropdown-item" onclick="deleteplanting(<?= $pla['planting_id']; ?>)">Delete</button>
+                                                </div>
+                                            </div>
                                         </td>
                                     </tr>
                                 <?php endforeach; ?>
                             </tbody>
+
                         </table>
                     </div>
                 </div>
@@ -77,7 +82,7 @@
 
         <div class="modal-content">
             <div class="modal-header">
-                <h5 class="modal-title" id="addfieldmodalLabel">Add New Crop Planting Details</h5>
+                <h5 class="modal-title" id="addplantingmodalLabel">Add New Crop Planting Details</h5>
             </div>
             <div class="modal-body">
                 <form action="/addplanting" method="post">
@@ -97,8 +102,8 @@
                     <div class="mb-3">
                         <label for="season" class="form-label">Season</label>
                         <select name="season" id="season" class=" form-control">
-                            <option value="dry-season">Dry Season(December to May)</option>
-                            <option value="wet-season">Wet Season (June to November)</option>
+                            <option value="Dry Season">Dry Season(December to May)</option>
+                            <option value="Wet Season">Wet Season (June to November)</option>
                         </select>
                     </div>
                     <div class="mb-3">
@@ -125,32 +130,44 @@
 </div>
 <!-- edit_product_modal.php -->
 
-<div class="modal fade" id="editfieldmodal" tabindex="-1" aria-labelledby="editfieldmodalLabel" aria-hidden="true">
+<div class="modal fade" id="editplantingmodal" tabindex="-1" aria-labelledby="editplantingmodalLabel" aria-hidden="true">
     <div class="modal-dialog modal-dialog-centered">
         <div class="modal-content">
             <div class="modal-header">
-                <h5 class="modal-title" id="editfieldmodalLabel">Edit Product</h5>
+                <h5 class="modal-title" id="editplantingmodalLabel">Edit Crop Planting Details</h5>
                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
             <div class="modal-body">
-                <form action="/viewfields/update" method="post">
-                    <input type="hidden" name="field_id" id="editfield_id">
+                <form action="/cropplanting/update" method="post">
+                    <input type="hidden" name="planting_id" id="editplanting_id">
                     <div class="mb-3">
                         <label for="editfield_name" class="form-label">Pangalan ng Bukid</label>
                         <input type="text" name="field_name" id="editfield_name" class="form-control">
                     </div>
                     <input type="hidden" name="farmer_id" id="editfarmer_id">
                     <div class="mb-3">
-                        <label for="editfield_owner" class="form-label">May-ari ng Bukid</label>
-                        <input type="text" name="field_owner" id="editfield_owner" class="form-control">
+                        <label for="editcrop_variety" class="form-label">Pangalan ng Variety</label>
+                        <input type="text" name="crop_variety" id="editcrop_variety" class="form-control">
                     </div>
                     <div class="mb-3">
-                        <label for="editfield_address" class="form-label">Address ng Bukid</label>
-                        <input type="text" name="field_address" id="editfield_address" class="form-control">
+                        <label for="editplanting_date" class="form-label">Araw ng Pagtatanim</label>
+                        <input type="date" name="planting_date" id="editplanting_date" class="form-control">
                     </div>
                     <div class="mb-3">
-                        <label for="editfield_total_area" class="form-label">Kabuuang Sukat</label>
-                        <input type="text" name="field_total_area" id="editfield_total_area" class="form-control">
+                        <label for="editseason" class="form-label">Season</label>
+                        <input type="text" name="season" id="editseason" class="form-control">
+                    </div>
+                    <div class="mb-3">
+                        <label for="editstart_date" class="form-label">Araw ng Pagsisimula ng Pagtatanim</label>
+                        <input type="date" name="start_date" id="editstart_date" class="form-control">
+                    </div>
+                    <div class="mb-3">
+                        <label for="editend_date" class="form-label">Araw ng Pagtatapos ng Pagtatanim</label>
+                        <input type="date" name="end_date" id="editend_date" class="form-control">
+                    </div>
+                    <div class="mb-3">
+                        <label for="editnotes" class="form-label">Pangalan ng Variety</label>
+                        <textarea name="notes" id="editnotes" class="form-control"></textarea>
                     </div>
                     <button type="submit" class="btn btn-primary">Save Changes</button>
                 </form>

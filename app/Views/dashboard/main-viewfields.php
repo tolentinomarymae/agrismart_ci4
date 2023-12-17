@@ -41,14 +41,24 @@
                                         <td><?= $fie['field_address'] ?></td>
                                         <td><?= $fie['field_total_area'] ?></td>
                                         <td>
-                                            <button type="button" class="btn btn-primary" onclick="openEditFieldModal(
-                                            <?= $fie['field_id']; ?>,
-                                            '<?= $fie['field_name']; ?>',
-                                            '<?= $fie['field_owner']; ?>',
-                                            '<?= $fie['field_address']; ?>',
-                                            '<?= $fie['field_total_area']; ?>',
-                                            )">Edit</button>
-                                            <button type="button" class="btn btn-danger" onclick="deleteProduct(<?= $fie['field_id']; ?>)">Delete</button>
+                                            <div class="btn-group">
+                                                <button type="button" class="btn btn-primary dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" style="background-color: #88c431; border: none;">
+                                                    Actions
+                                                </button>
+                                                <div class="dropdown-menu">
+                                                    <button type="button" class="dropdown-item" onclick="openEditFieldModal(
+                                                        <?= $fie['field_id']; ?>,
+                                                        '<?= $fie['field_name']; ?>',
+                                                        '<?= $fie['field_owner']; ?>',
+                                                        '<?= $fie['field_address']; ?>',
+                                                        '<?= $fie['field_total_area']; ?>',
+                                                        )">Edit</button>
+                                                    <button type="button" class="dropdown-item" onclick="deleteProduct(<?= $fie['field_id']; ?>)">Delete</button>
+                                                    <button type="button" class="dropdown-item" onclick="openAddPlantingModal('<?= $fie['field_name']; ?>')">Add New Planting Details</button>
+                                                    <button type="button" class="dropdown-item" onclick="openAddJobModal('<?= $fie['field_name']; ?>')">Add New Job</button>
+                                                    <button type="button" class="dropdown-item" onclick="openAddHarvestModal('<?= $fie['field_name']; ?>')">Add New Harvest</button>
+                                                </div>
+                                            </div>
                                         </td>
                                     </tr>
                                 <?php endforeach; ?>
@@ -61,7 +71,7 @@
     </div>
 </div>
 
-<!-- Add Product Modal -->
+<!-- Add Field Modal -->
 <div class="modal fade" id="addfieldmodal" role="dialog" aria-labelledby="addfieldmodalLabel" aria-hidden="true">
     <br>
     <div class="modal-dialog modal-dialog-centered" style="z-index: 10000;">
@@ -102,6 +112,172 @@
 
     </div>
 </div>
+
+
+<!-- Add Planting Details Modal -->
+<div class="modal fade" id="addplantingmodal" role="dialog" aria-labelledby="addplantingmodalLabel" aria-hidden="true">
+    <br>
+    <div class="modal-dialog modal-dialog-centered" style="z-index: 10000;">
+
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="addplantingmodalLabel">Add New Crop Planting Details</h5>
+            </div>
+            <div class="modal-body">
+                <form action="/addplanting" method="post">
+                    <div class="mb-3">
+                        <label for="field_name" class="form-label">Pangalan ng Bukid</label>
+                        <input type="text" name="field_name" id="field_name_add" placeholder="Pangalan ng Bukid" class="form-control">
+                    </div>
+                    <div class="mb-3">
+                        <label for="crop_variety" class="form-label">Pangalang ng Variety</label>
+                        <input type="text" name="crop_variety" id="crop_variety" placeholder="Pangalan ng Variety" class="form-control">
+                    </div>
+                    <div class="mb-3">
+                        <label for="planting_date" class="form-label">Araw ng Pagtatanim</label>
+                        <input type="date" name="planting_date" id="planting_date" class=" form-control">
+                    </div>
+                    <div class="mb-3">
+                        <label for="season" class="form-label">Season</label>
+                        <select name="season" id="season" class="form-select">
+                            <option value="Dry Season">Dry Season(December to May)</option>
+                            <option value="Wet Season">Wet Season (June to November)</option>
+                        </select>
+                    </div>
+                    <div class="mb-3">
+                        <label for="start_date" class="form-label">Simula ng Pagtatanim</label>
+                        <input type="date" name="start_date" id="start_date" class=" form-control">
+                    </div>
+                    <div class="mb-3">
+                        <label for="end_date" class="form-label">Araw ng Ani</label>
+                        <input type="date" name="end_date" id="end_date" class=" form-control">
+                    </div>
+                    <div class="mb-3">
+                        <label for="notes" class="form-label">Araw ng Pagtatanim</label>
+                        <textarea name="notes" id="notes" class=" form-control"></textarea>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                        <button type="submit" class="btn btn-primary">Submit</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+
+    </div>
+</div>
+
+
+<!-- Add Job Modal -->
+<div class="modal fade" id="addjobmodal" role="dialog" aria-labelledby="addjobmodalLabel" aria-hidden="true">
+    <br>
+    <div class="modal-dialog modal-dialog-centered" style="z-index: 10000;">
+
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="addjobmodalLabel">Add New Job</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <form action="/addjob" method="post">
+                    <div class="mb-3">
+                        <label for="job_name" class="form-label">Trabaho</label>
+                        <select name="job_name" id="job_name" class="form-select">
+                            <option value="Gamas">Gamas</option>
+                            <option value="Lipat Tanim">Lipat Tanim</option>
+                            <option value="Spray">Spray</option>
+                            <option value="Fertilize">Fertilize</option>
+                        </select>
+                    </div>
+                    <div class="mb-3">
+                        <label for="field_name" class="form-label">Pangalan ng Bukid</label>
+                        <input type="text" name="field_name" id="field_nameadd" placeholder="Pangalan ng Bukid" class="form-control">
+                    </div>
+
+                    <div class="mb-3">
+                        <label for="finished_date" class="form-label">Araw</label>
+                        <input type="date" name="finished_date" id="finished_date" class=" form-control">
+                    </div>
+                    <div class="mb-3">
+                        <label for="worker_name" class="form-label">Pangalang ng Magtatrabaho</label>
+                        <input type="text" name="worker_name" id="worker_name" placeholder="Pangalan ng Magtatrabaho" class="form-control">
+                    </div>
+                    <div class="mb-3">
+                        <label for="equipment_use" class="form-label">Kagamitan</label>
+                        <input type="text" name="equipment_use" id="equipment_use" placeholder="Kagamitan" class="form-control">
+                    </div>
+                    <div class="mb-3">
+                        <label for="quantity_use" class="form-label">Bilang ng Ginamit</label>
+                        <input type="text" name="quantity_use" id="quantity_use" placeholder="Bilang ng Ginamit" class="form-control">
+                    </div>
+                    <div class="mb-3">
+                        <label for="total_money_spent" class="form-label">Total na Nagastos</label>
+                        <input type="text" name="total_money_spent" id="total_money_spent" placeholder="Total na Nagastos" class="form-control">
+                    </div>
+                    <div class="mb-3">
+                        <label for="notes" class="form-label">Notes</label>
+                        <input type="text" name="notes" id="notes" placeholder="Notes" class="form-control">
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                        <button type="submit" class="btn btn-primary">Submit</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+
+    </div>
+</div>
+
+
+<!-- Add Harvest Modal -->
+<div class="modal fade" id="addharvestmodal" role="dialog" aria-labelledby="addharvestmodalLabel" aria-hidden="true">
+    <br>
+    <div class="modal-dialog modal-dialog-centered" style="z-index: 10000;">
+
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="addharvestmodalLabel">Add New Harvest</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <form action="/addharvest" method="post">
+                    <div class="mb-3">
+                        <label for="field_name" class="form-label">Pangalan ng Bukid</label>
+                        <input type="text" name="field_name" id="field_name_harvest" placeholder="Pangalan ng Bukid" class="form-control">
+                    </div>
+                    <div class="mb-3">
+                        <label for="variety_name" class="form-label">Pangalan ng Variety</label>
+                        <input type="text" name="variety_name" id="variety_name" placeholder="Pangalan ng Variety" class=" form-control">
+                    </div>
+                    <div class="mb-3">
+                        <label for="harvest_quantity" class="form-label">Dami ng Naani</label>
+                        <input type="text" name="harvest_quantity" id="harvest_quantity" placeholder="Dami ng Naani" class="form-control">
+                    </div>
+                    <div class="mb-3">
+                        <label for="total_revenue" class="form-label">Kabuuang Kita</label>
+                        <input type="text" name="total_revenue" id="total_revenue" placeholder="Kabuuang Kita" class="form-control">
+                    </div>
+                    <div class="mb-3">
+                        <label for="harvest_date" class="form-label">Araw ng Ani</label>
+                        <input type="date" name="harvest_date" id="harvest_date" class="form-control">
+                    </div>
+                    <div class="mb-3">
+                        <label for="notes" class="form-label">Notes</label>
+                        <input type="text" name="notes" id="notes" placeholder="Notes" class="form-control">
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                        <button type="submit" class="btn btn-primary">Submit</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+
+    </div>
+</div>
+
+
 <!-- edit_product_modal.php -->
 
 <div class="modal fade" id="editfieldmodal" tabindex="-1" aria-labelledby="editfieldmodalLabel" aria-hidden="true">
@@ -118,7 +294,6 @@
                         <label for="editfield_name" class="form-label">Pangalan ng Bukid</label>
                         <input type="text" name="field_name" id="editfield_name" class="form-control">
                     </div>
-                    <input type="hidden" name="farmer_id" id="editfarmer_id">
                     <div class="mb-3">
                         <label for="editfield_owner" class="form-label">May-ari ng Bukid</label>
                         <input type="text" name="field_owner" id="editfield_owner" class="form-control">

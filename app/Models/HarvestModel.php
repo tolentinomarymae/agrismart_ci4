@@ -12,7 +12,7 @@ class HarvestModel extends Model
     protected $returnType       = 'array';
     protected $useSoftDeletes   = false;
     protected $protectFields    = true;
-    protected $allowedFields    = ['field_name', 'rotation_id', 'variety_name', 'harvest_quantity', 'total_revenue', 'harvest_date', 'notes'];
+    protected $allowedFields    = ['field_name', 'rotation_id', 'variety_name', 'harvest_quantity', 'total_revenue', 'harvest_date', 'notes', 'user_id'];
 
     // Dates
     protected $useTimestamps = false;

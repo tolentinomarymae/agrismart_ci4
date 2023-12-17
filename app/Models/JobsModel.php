@@ -12,7 +12,7 @@ class JobsModel extends Model
     protected $returnType       = 'array';
     protected $useSoftDeletes   = false;
     protected $protectFields    = true;
-    protected $allowedFields    = ['job_name', 'field_name', 'finished_date', 'worker_name', 'equipment_use', 'quantity_use', 'total_money_spent', 'notes'];
+    protected $allowedFields    = ['job_name', 'field_name', 'finished_date', 'worker_name', 'equipment_use', 'quantity_use', 'total_money_spent', 'notes', 'user_id'];
 
     // Dates
     protected $useTimestamps = false;

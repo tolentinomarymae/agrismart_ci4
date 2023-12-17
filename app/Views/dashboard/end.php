@@ -1,33 +1,25 @@
 <script>
-    // Function to open the edit modal and populate it with product data
     function openEditFieldModal(field_id, field_name, field_owner, field_address, field_total_area) {
-        // Set the product ID and name in the modal
         document.getElementById('editfield_id').value = field_id;
         document.getElementById('editfield_name').value = field_name;
         document.getElementById('editfield_owner').value = field_owner;
         document.getElementById('editfield_address').value = field_address;
         document.getElementById('editfield_total_area').value = field_total_area;
 
-        // Open the modal
         $('#editfieldmodal').modal('show');
     }
 
 
-    // Function to delete a product
     function deleteProduct(field_id) {
-        // Confirm with the user before proceeding
         if (confirm("Are you sure you want to delete this product?")) {
-            // Send an AJAX request to delete the product
             $.ajax({
                 type: 'POST',
-                url: '/viewfields/delete/' + field_id, // Update the URL as needed
+                url: '/viewfields/delete/' + field_id,
                 success: function(response) {
-                    // Reload the page or update the table as needed
-                    window.location.reload(); // Reload the page for simplicity
+                    window.location.reload();
                 },
                 error: function(error) {
                     console.error('Error:', error);
-                    // Handle errors if needed
                 }
             });
         }
@@ -43,12 +35,47 @@
         });
     });
 
+    // crop planting
 
+    function openAddPlantingModal(field_name) {
+        document.getElementById('field_name_add').value = field_name;
+        $('#addplantingmodal').modal('show');
+    }
 
+    function openEditPlantingModal(planting_id, field_name, crop_variety, planting_date, season, start_date, end_date, notes) {
+        document.getElementById('editplanting_id').value = planting_id;
+        document.getElementById('editfield_name').value = field_name;
+        document.getElementById('editcrop_variety').value = crop_variety;
+        document.getElementById('editplanting_date').value = planting_date;
+        document.getElementById('editseason').value = season;
+        document.getElementById('editstart_date').value = start_date;
+        document.getElementById('editend_date').value = end_date;
+        document.getElementById('editnotes').value = notes;
+
+        $('#editplantingmodal').modal('show');
+    }
+
+    function deleteplanting(planting_id) {
+        if (confirm("Are you sure you want to delete this product?")) {
+            $.ajax({
+                type: 'POST',
+                url: '/cropplanting/delete/' + planting_id,
+                success: function(response) {
+                    window.location.reload();
+                },
+                error: function(error) {
+                    console.error('Error:', error);
+                }
+            });
+        }
+    }
 
     //jobs
+    function openAddJobModal(field_name) {
+        document.getElementById('field_nameadd').value = field_name;
+        $('#addjobmodal').modal('show');
+    }
 
-    // Function to open the edit modal and populate it with product data
     function openEditJobModal(job_id, job_name, field_name, finished_date, worker_name, equipment_use, quantity_use, total_money_spent, notes) {
         // Set the product ID and name in the modal
         document.getElementById('editjob_id').value = job_id;
@@ -60,26 +87,22 @@
         document.getElementById('editquantity_use').value = quantity_use;
         document.getElementById('edittotal_money_spent').value = total_money_spent;
         document.getElementById('editnotes').value = notes;
-        // Open the modal
+
         $('#editjobmodal').modal('show');
     }
 
 
-    // Function to delete a product
+
     function deleteJob(job_id) {
-        // Confirm with the user before proceeding
         if (confirm("Are you sure you want to delete this product?")) {
-            // Send an AJAX request to delete the product
             $.ajax({
                 type: 'POST',
-                url: '/jobs/delete/' + job_id, // Update the URL as needed
+                url: '/jobs/delete/' + job_id,
                 success: function(response) {
-                    // Reload the page or update the table as needed
-                    window.location.reload(); // Reload the page for simplicity
+                    window.location.reload();
                 },
                 error: function(error) {
                     console.error('Error:', error);
-                    // Handle errors if needed
                 }
             });
         }
@@ -101,8 +124,11 @@
 
 
     //harvest
+    function openAddHarvestModal(field_name) {
+        document.getElementById('field_name_harvest').value = field_name;
+        $('#addharvestmodal').modal('show');
+    }
 
-    // Function to open the edit modal and populate it with product data
     function openEditHarvestModal(harvest_id, field_name, variety_name, harvest_quantity, total_revenue, harvest_date, notes) {
         // Set the product ID and name in the modal
         document.getElementById('editharvest_id').value = harvest_id;
@@ -151,7 +177,14 @@
     });
 </script>
 
+<!-- jQuery -->
+<script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
 
+<!-- Popper.js -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+
+<!-- Bootstrap JS -->
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
 <script src="<?= base_url() ?>dashboard/js/jquery1-3.4.1.min.js"></script>
 
 <script src="<?= base_url() ?>dashboard/js/popper1.min.js"></script>
