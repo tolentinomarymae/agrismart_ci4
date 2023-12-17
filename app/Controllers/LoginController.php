@@ -8,16 +8,67 @@ use App\Controllers\BaseController;
 class LoginController extends BaseController
 {
 
+    private $field;
+    private $jobs;
+    private $harvest;
+    private $user;
+    private $planting;
+    private $worker;
 
+    public function __construct()
+    {
+        $this->field = new \App\Models\VIewFieldsModel();
+        $this->jobs = new \App\Models\JobsModel();
+        $this->harvest = new \App\Models\HarvestModel();
+        $this->user = new \App\Models\RegisterModel();
+        $this->planting = new \App\Models\PlantingModel();
+        $this->worker = new \App\Models\WorkerModel();
+    }
     public function dashboards()
     {
         if (!session()->get('isLoggedIn')) {
-            return redirect()->to('/sign_ins');
-        } else {
-
-            return view('userfolder/dashboard');
+            return redirect()->to('/logins');
         }
+
+        $userId = session()->get('farmer_id');
+
+        // Get the current year
+        $currentYear = date('Y');
+
+        // Sum of harvest_quantity
+        $resultQuantity = $this->harvest
+            ->selectSum('harvest_quantity', 'totalHarvestQuantity')
+            ->where('user_id', $userId)
+            ->get();
+
+        $totalHarvestQuantity = $resultQuantity->getRow()->totalHarvestQuantity;
+
+        // Sum of total_revenue for the current year
+        $resultRevenue = $this->harvest
+            ->selectSum('total_revenue', 'totalRevenueThisYear')
+            ->where('user_id', $userId)
+            ->where('YEAR(harvest_date)', $currentYear)
+            ->get();
+
+        $totalRevenueThisYear = $resultRevenue->getRow()->totalRevenueThisYear;
+
+        $harvestData = $this->harvest->where('user_id', $userId)->findAll();
+        $revenueData = $this->harvest->where('user_id', $userId)->findAll();
+        $workerData = $this->worker->where('user_id', $userId)->findAll();
+
+        $data = [
+            'totalHarvestQuantity' => $totalHarvestQuantity,
+            'totalRevenueThisYear' => $totalRevenueThisYear,
+            'harvest' => $harvestData,
+            'revenue' => $revenueData,
+            'worker' => $workerData,
+
+        ];
+
+        return view('userfolder/dashboard', $data);
     }
+
+
     public function register()
     {
 

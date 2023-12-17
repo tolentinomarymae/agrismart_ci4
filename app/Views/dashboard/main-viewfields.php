@@ -252,11 +252,11 @@
                     </div>
                     <div class="mb-3">
                         <label for="harvest_quantity" class="form-label">Dami ng Naani</label>
-                        <input type="text" name="harvest_quantity" id="harvest_quantity" placeholder="Dami ng Naani" class="form-control">
+                        <input type="number" name="harvest_quantity" id="harvest_quantity" placeholder="Dami ng Naani" class="form-control">
                     </div>
                     <div class="mb-3">
                         <label for="total_revenue" class="form-label">Kabuuang Kita</label>
-                        <input type="text" name="total_revenue" id="total_revenue" placeholder="Kabuuang Kita" class="form-control">
+                        <input type="number" name="total_revenue" id="total_revenue" placeholder="Kabuuang Kita" class="form-control">
                     </div>
                     <div class="mb-3">
                         <label for="harvest_date" class="form-label">Araw ng Ani</label>

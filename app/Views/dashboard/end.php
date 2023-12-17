@@ -175,6 +175,31 @@
 
         });
     });
+
+    // worker
+    function openEditWorkerModal(worker_id, worker_name) {
+        // Set the product ID and name in the modal
+        document.getElementById('editworker_id').value = worker_id;
+        document.getElementById('editworker_name').value = worker_name;
+        // Open the modal
+        $('#editworkermodal').modal('show');
+    }
+
+
+    function deleteworker(worker_id) {
+        if (confirm("Are you sure you want to delete this worker?")) {
+            $.ajax({
+                type: 'POST',
+                url: '/workers/delete/' + worker_id,
+                success: function(response) {
+                    window.location.reload();
+                },
+                error: function(error) {
+                    console.error('Error:', error);
+                }
+            });
+        }
+    }
 </script>
 
 <!-- jQuery -->
@@ -228,6 +253,9 @@
 <script src="<?= base_url() ?>dashboard/js/custom.js"></script>
 <script src="<?= base_url() ?>dashboard/vendors/apex_chart/bar_active_1.js"></script>
 <script src="<?= base_url() ?>dashboard/vendors/apex_chart/apex_chart_list.js"></script>
+
+
+<script src="<?= base_url() ?>dashboard/vendors/chartjs/chartjs_init.js"></script>
 </body>
 
 </html>

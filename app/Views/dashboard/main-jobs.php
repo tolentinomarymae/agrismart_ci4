@@ -47,19 +47,26 @@
                                             <td><?= $job['notes'] ?></td>
 
                                             <td>
-                                                <button type="button" class="btn btn-primary" onclick="openEditJobModal(
-                                            <?= $job['job_id']; ?>,
-                                            '<?= $job['job_name']; ?>',
-                                            '<?= $job['field_name']; ?>',
-                                            '<?= $job['finished_date']; ?>',
-                                            '<?= $job['worker_name']; ?>',
-                                            '<?= $job['equipment_use']; ?>',
-                                            '<?= $job['quantity_use']; ?>',
-                                            '<?= $job['total_money_spent']; ?>',
-                                           '<?= $job['notes']; ?>',
+                                                <div class="btn-group">
+                                                    <button type="button" class="btn btn-primary dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" style="background-color: #88c431; border: none;">
+                                                        Actions
+                                                    </button>
+                                                    <div class="dropdown-menu">
+                                                        <button type="button" class="dropdown-item" onclick="openEditJobModal(
+                                                            <?= $job['job_id']; ?>,
+                                                            '<?= $job['job_name']; ?>',
+                                                            '<?= $job['field_name']; ?>',
+                                                            '<?= $job['finished_date']; ?>',
+                                                            '<?= $job['worker_name']; ?>',
+                                                            '<?= $job['equipment_use']; ?>',
+                                                            '<?= $job['quantity_use']; ?>',
+                                                            '<?= $job['total_money_spent']; ?>',
+                                                            '<?= $job['notes']; ?>',
 
-                                            )">Edit</button>
-                                                <button type="button" class="btn btn-danger" onclick="deleteJob(<?= $job['job_id']; ?>)">Delete</button>
+                                                            )">Edit</button>
+                                                        <button type="button" class="dropdown-item" onclick="deleteJob(<?= $job['job_id']; ?>)">Delete</button>
+                                                    </div>
+                                                </div>
                                             </td>
                                         </tr>
                                     <?php endforeach; ?>

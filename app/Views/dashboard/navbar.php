@@ -95,11 +95,11 @@
                 <span>Inventory</span>
             </a>
             <ul>
-                <li><a href="">Work Types/Workers</a></li>
-                <li><a href="">Crop Variety</a></li>
-                <li><a href="">Fertilizers</a></li>
-                <li><a href="">Equipment</a></li>
-                <li><a href="">Other Expenses</a></li>
+                <li><a href="/workers">Workers</a></li>
+                <li><a href="/cropvariety">Crop Variety</a></li>
+                <li><a href="/fertilizers">Fertilizers</a></li>
+                <li><a href="/equipment">Equipment</a></li>
+                <li><a href="/otherexpenses">Other Expenses</a></li>
             </ul>
         </li>
     </ul>

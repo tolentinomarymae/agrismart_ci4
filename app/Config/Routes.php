@@ -7,7 +7,6 @@ use CodeIgniter\Router\RouteCollection;
  */
 $routes->get('/', 'LandingpageController::index');
 $routes->get('/dashboards', 'LoginController::dashboards', ['filter' => 'authGuard']);
-$routes->get('/farmerdashboard', 'DashboardController::farmerdashboard');
 $routes->post('/register', 'LoginController::register');
 $routes->get('/registerview', 'LoginController::registerview');
 $routes->get('/sign_ins', 'LoginController::login');
@@ -42,3 +41,10 @@ $routes->post('/addharvest', 'DashboardController::addnewharvest');
 $routes->post('/harvest/edit/(:num)', 'DashboardController::editharvest/$1');
 $routes->post('/harvest/update', 'DashboardController::updateharvest');
 $routes->post('harvest/delete/(:num)', 'DashboardController::deleteHarvest/$1');
+
+// worker
+$routes->get('/workers', 'DashboardController::worker', ['filter' => 'authGuard']);
+$routes->post('/addworker', 'DashboardController::addnewworker');
+$routes->post('/workers/edit/(:num)', 'DashboardController::editworker/$1');
+$routes->post('/workers/update', 'DashboardController::updateworker');
+$routes->post('workers/delete/(:num)', 'DashboardController::deleteworker/$1');

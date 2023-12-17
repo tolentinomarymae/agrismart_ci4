@@ -9,14 +9,14 @@
                                 <div class="quick_activity_wrap quick_activity_wrap">
                                     <div class="single_quick_activity  d-flex">
                                         <div class="count_content count_content2">
-                                            <h3><span class="counter blue_color">520</span> </h3>
-                                            <p>Na-aning Palay</p>
+                                            <h3><span class="counter blue_color"><?= $totalHarvestQuantity ?></span> </h3>
+                                            <p>Total na Naani</p>
                                         </div>
                                     </div>
                                     <div class="single_quick_activity d-flex">
                                         <div class="count_content count_content2">
-                                            <h3><span class="counter red_color">50000</span> </h3>
-                                            <p>Kita ngayong Quarter</p>
+                                            <h3><span class="counter red_color"><?= $totalRevenueThisYear ?></span> </h3>
+                                            <p>Kita Ngayong Taon</p>
                                         </div>
                                     </div>
                                     <div class="single_quick_activity  d-flex">
@@ -74,6 +74,16 @@
                         </div>
                     </div>
                     <div id="bar_wev"></div>
+                    <div class="col-xl-12">
+                        <div class="white_box mb_30">
+                            <div class="box_header ">
+                                <div class="main-title">
+                                    <h3 class="mb-0">Line Chart</h3>
+                                </div>
+                            </div>
+                            <canvas style="height: 250px" id="lineChart"></canvas>
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>
