@@ -1,13 +1,12 @@
-
 <nav class="sidebar">
     <div class="logo d-flex justify-content-between">
-        <a href=""><img src="<?=base_url()?>assets_landingpage/img/agrismart-logo.png" alt></a>
+        <a href=""><img src="<?= base_url() ?>assets_landingpage/img/agrismart-logo.png" alt></a>
         <div class="sidebar_close_icon d-lg-none">
             <i class="ti-close"></i>
         </div>
     </div>
     <ul id="sidebar_menu">
-        
+
         <li class="side_menu_title">
             <span>Dashboard</span>
         </li>
@@ -17,7 +16,7 @@
                 <span>Dashboard</span>
             </a>
             <ul>
-                <li><a  href="/dashboards">View Data Center</a></li>
+                <li><a href="/admindashboard">View Data Center</a></li>
             </ul>
         </li>
         <li class="side_menu_title">
@@ -29,35 +28,17 @@
                 <span>Fields</span>
             </a>
             <ul>
-                <li><a href="">View Fields</a></li>
+                <li><a href="/adminfields">View Fields</a></li>
             </ul>
         </li>
         <li class="side_menu_title">
             <span>About Fields</span>
         </li>
         <li class>
-            <a class="has-arrow" href="/croprotation" aria-expanded="false">
+            <a class="has-arrow" href="" aria-expanded="false">
                 <img src="img/menu-icon/2.svg" alt>
                 <span>Crop Rotation</span>
             </a>
-            <ul>
-                <li><a href="">By Fields</a></li>
-                <li><a href="">By Season</a></li>
-                <li><a href="">By Variety of Crop</a></li>
-            </ul>
-        </li>
-        <li class>
-            <a class="has-arrow" href="/jobs" aria-expanded="false">
-                <img src="img/menu-icon/2.svg" alt>
-                <span>Jobs</span>
-            </a>
-            <ul>
-                <li><a href="">Spray</a></li>
-                <li><a href="">Fertilize</a></li>
-                <li><a href="">Lipat Tanim</a></li>
-                <li><a href="">Fertigate</a></li>
-                <li><a href="">Gamas</a></li>
-            </ul>
         </li>
         <li class>
             <a class="has-arrow" href="#" aria-expanded="false">
@@ -65,7 +46,7 @@
                 <span>Harvest</span>
             </a>
             <ul>
-                <li><a href="">Add Harvest</a></li>
+                <li><a href="">Harvest</a></li>
             </ul>
         </li>
         <li class="side_menu_title">

@@ -12,7 +12,6 @@ $routes->get('/registerview', 'LoginController::registerview');
 $routes->get('/sign_ins', 'LoginController::login');
 $routes->post('/loginauth', 'LoginController::loginauth');
 $routes->match(['post', 'get'], '/dashboards', 'LoginController::dashboards', ['filter' => 'authGuard']);
-$routes->get('/admindashboard', 'LoginController::admindashboard', ['filter' => 'authGuard']);
 
 //fields
 $routes->get('/viewfields', 'DashboardController::viewfields');
@@ -48,3 +47,12 @@ $routes->post('/addworker', 'DashboardController::addnewworker');
 $routes->post('/workers/edit/(:num)', 'DashboardController::editworker/$1');
 $routes->post('/workers/update', 'DashboardController::updateworker');
 $routes->post('workers/delete/(:num)', 'DashboardController::deleteworker/$1');
+
+// crop variety 
+$routes->get('/cropvariety', 'DashboardController::cropvariety', ['filter' => 'authGuard']);
+$routes->post('/addvariety', 'DashboardController::addnewvariety');
+
+// admin dashboard
+
+$routes->get('/admindashboard', 'LoginController::admindashboard', ['filter' => 'authGuard']);
+$routes->get('/adminfields', 'DashboardController::adminfields');

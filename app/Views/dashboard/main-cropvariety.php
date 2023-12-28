@@ -17,7 +17,7 @@
                                 </div>
                             </div>
                             <div class="add_button ms-2">
-                                <a href="#" data-bs-toggle="modal" data-bs-target="#addworkermodal" class="btn_1">Add New</a>
+                                <a href="#" data-bs-toggle="modal" data-bs-target="#addvarietymodal" class="btn_1">Add New</a>
                             </div>
                         </div>
                     </div>
@@ -26,30 +26,37 @@
                             <table class="table lms_table_active">
                                 <thead>
                                     <tr>
-                                        <th scope="col">Pangalan ng Magtatrabaho</th>
-                                        <th scope="col">Gana sa Isang Araw</th>
+                                        <th scope="col">Pangalan ng Variety</th>
+                                        <th scope="col">Presyo</th>
+                                        <th scope="col">Dami</th>
+                                        <th scope="col">Araw ng Pagbili/Pagbigay</th>
+                                        <th scope="col">Notes</th>
                                         <th scope="col">Aksyon</th>
                                     </tr>
                                 </thead>
                                 <tbody>
-                                    <?php foreach ($worker as $work) : ?>
+                                    <?php foreach ($variety as $var) : ?>
                                         <tr>
-                                            <td><?= $work['worker_name'] ?></td>
-                                            <td><?= $work['salaryperday'] ?></td>
-
+                                            <td><?= $var['variety_name'] ?></td>
+                                            <td><?= $var['variety_price'] ?></td>
+                                            <td><?= $var['quantity'] ?></td>
+                                            <td><?= $var['date_bought'] ?></td>
+                                            <td><?= $var['notes'] ?></td>
                                             <td>
                                                 <div class="btn-group">
                                                     <button type="button" class="btn btn-primary dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" style="background-color: #88c431; border: none;">
                                                         Actions
                                                     </button>
                                                     <div class="dropdown-menu">
-                                                        <button type="button" class="dropdown-item" onclick="openEditWorkerModal(
-                                                            <?= $work['worker_id']; ?>,
-                                                            '<?= $work['worker_name']; ?>',
-                                                            '<?= $work['salaryperday']; ?>',
-
-                                                            )">Edit</button>
-                                                        <button type="button" class="dropdown-item" onclick="deleteworker(<?= $work['worker_id']; ?>)">Delete</button>
+                                                        <button type="button" class="dropdown-item" onclick="openEditVareityModal(
+                                                        <?= $var['variety_id']; ?>,
+                                                        '<?= $var['variety_name']; ?>',
+                                                        '<?= $var['variety_price']; ?>',
+                                                        '<?= $var['quantity']; ?>',
+                                                        '<?= $var['date_bought']; ?>',
+                                                        '<?= $var['notes']; ?>',
+                                                        )">Edit</button>
+                                                        <button type="button" class="dropdown-item" onclick="deletevariety(<?= $var['variety_id']; ?>)">Delete</button>
                                                     </div>
                                                 </div>
                                             </td>
@@ -66,24 +73,35 @@
 </div>
 
 <!-- Add Worker Modal -->
-<div class="modal fade" id="addworkermodal" role="dialog" aria-labelledby="addworkermodalLabel" aria-hidden="true">
+<div class="modal fade" id="addvarietymodal" role="dialog" aria-labelledby="addvarietymodalLabel" aria-hidden="true">
     <br>
     <div class="modal-dialog modal-dialog-centered" style="z-index: 10000;">
 
         <div class="modal-content">
             <div class="modal-header">
-                <h5 class="modal-title" id="addworkermodalLabel">Add New Worker</h5>
-                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                <h5 class="modal-title" id="addvarietymodalLabel">Add New Variety</h5>
             </div>
             <div class="modal-body">
-                <form action="/addworker" method="post">
+                <form action="/addvariety" method="post">
                     <div class="mb-3">
-                        <label for="worker_name" class="form-label">Pangalan ng Magtatrabaho</label>
-                        <input type="text" name="worker_name" id="worker_name" placeholder="Pangalan ng Magtatrabaho" class="form-control">
+                        <label for="variety_name" class="form-label">Pangalan ng Variety</label>
+                        <input type="text" name="variety_name" id="variety_name" placeholder="Pangalan ng Variety" class="form-control">
                     </div>
                     <div class="mb-3">
-                        <label for="salaryperday" class="form-label">Gana sa Isang Araw</label>
-                        <input type="number" name="salaryperday" id="salaryperday" placeholder="Gana sa Isang Araw" class="form-control">
+                        <label for="variety_price" class="form-label">Presyo</label>
+                        <input type="number" name="variety_price" id="variety_price" placeholder="Gana sa Isang Araw" class="form-control">
+                    </div>
+                    <div class="mb-3">
+                        <label for="quantity" class="form-label">Dami</label>
+                        <input type="number" name="quantity" id="quantity" placeholder="Dami" class="form-control">
+                    </div>
+                    <div class="mb-3">
+                        <label for="date_bought" class="form-label">Araw ng Pagbili/Pagbigay</label>
+                        <input type="date" name="date_bought" id="date_bought" placeholder="Pangalan ng Variety" class="form-control">
+                    </div>
+                    <div class="mb-3">
+                        <label for="notes" class="form-label">Pangalan ng Variety</label>
+                        <textarea name="notes" id="notes" placeholder="Notes" class="form-control"></textarea>
                     </div>
                     <div class="modal-footer">
                         <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>

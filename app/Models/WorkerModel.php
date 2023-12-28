@@ -12,7 +12,7 @@ class WorkerModel extends Model
     protected $returnType       = 'array';
     protected $useSoftDeletes   = false;
     protected $protectFields    = true;
-    protected $allowedFields    = ['worker_name', 'user_id'];
+    protected $allowedFields    = ['worker_name', 'salaryperday', 'user_id'];
 
     // Dates
     protected $useTimestamps = false;

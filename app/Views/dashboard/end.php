@@ -37,14 +37,15 @@
 
     // crop planting
 
-    function openAddPlantingModal(field_name) {
+
+    function openAddPlantingModal(field_id, field_name) {
+        document.getElementById('field_id_planting').value = field_id;
         document.getElementById('field_name_add').value = field_name;
         $('#addplantingmodal').modal('show');
     }
 
-    function openEditPlantingModal(planting_id, field_name, crop_variety, planting_date, season, start_date, end_date, notes) {
+    function openEditPlantingModal(planting_id, crop_variety, planting_date, season, start_date, end_date, notes) {
         document.getElementById('editplanting_id').value = planting_id;
-        document.getElementById('editfield_name').value = field_name;
         document.getElementById('editcrop_variety').value = crop_variety;
         document.getElementById('editplanting_date').value = planting_date;
         document.getElementById('editseason').value = season;
@@ -71,7 +72,8 @@
     }
 
     //jobs
-    function openAddJobModal(field_name) {
+    function openAddJobModal(field_id, field_name) {
+        document.getElementById('field_id_add').value = field_id;
         document.getElementById('field_nameadd').value = field_name;
         $('#addjobmodal').modal('show');
     }
@@ -124,7 +126,8 @@
 
 
     //harvest
-    function openAddHarvestModal(field_name) {
+    function openAddHarvestModal(field_id, field_name) {
+        document.getElementById('field_id_harvest').value = field_id;
         document.getElementById('field_name_harvest').value = field_name;
         $('#addharvestmodal').modal('show');
     }
@@ -177,10 +180,11 @@
     });
 
     // worker
-    function openEditWorkerModal(worker_id, worker_name) {
+    function openEditWorkerModal(worker_id, worker_name, salaryperday) {
         // Set the product ID and name in the modal
         document.getElementById('editworker_id').value = worker_id;
         document.getElementById('editworker_name').value = worker_name;
+        document.getElementById('editsalaryperday').value = salaryperday;
         // Open the modal
         $('#editworkermodal').modal('show');
     }

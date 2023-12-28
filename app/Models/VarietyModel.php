@@ -4,15 +4,15 @@ namespace App\Models;
 
 use CodeIgniter\Model;
 
-class HarvestModel extends Model
+class VarietyModel extends Model
 {
-    protected $table            = 'harvest';
-    protected $primaryKey       = 'harvest_id';
+    protected $table            = 'cropvariety';
+    protected $primaryKey       = 'variety_id';
     protected $useAutoIncrement = true;
     protected $returnType       = 'array';
     protected $useSoftDeletes   = false;
     protected $protectFields    = true;
-    protected $allowedFields    = ['field_id', 'field_name', 'rotation_id', 'variety_name', 'harvest_quantity', 'total_revenue', 'harvest_date', 'notes', 'user_id', 'farmer_name'];
+    protected $allowedFields    = ['variety_name', 'variety_price', 'quantity', 'date_bought', 'notes', 'user_id'];
 
     // Dates
     protected $useTimestamps = false;

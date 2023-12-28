@@ -54,9 +54,9 @@
                                                         '<?= $fie['field_total_area']; ?>',
                                                         )">Edit</button>
                                                     <button type="button" class="dropdown-item" onclick="deleteProduct(<?= $fie['field_id']; ?>)">Delete</button>
-                                                    <button type="button" class="dropdown-item" onclick="openAddPlantingModal('<?= $fie['field_name']; ?>')">Add New Planting Details</button>
-                                                    <button type="button" class="dropdown-item" onclick="openAddJobModal('<?= $fie['field_name']; ?>')">Add New Job</button>
-                                                    <button type="button" class="dropdown-item" onclick="openAddHarvestModal('<?= $fie['field_name']; ?>')">Add New Harvest</button>
+                                                    <button type="button" class="dropdown-item" onclick="openAddPlantingModal('<?= $fie['field_id']; ?>', '<?= $fie['field_name']; ?>')">Add New Planting Details</button>
+                                                    <button type="button" class="dropdown-item" onclick="openAddJobModal('<?= $fie['field_id']; ?>', '<?= $fie['field_name']; ?>')">Add New Job</button>
+                                                    <button type="button" class="dropdown-item" onclick="openAddHarvestModal('<?= $fie['field_id']; ?>', '<?= $fie['field_name']; ?>')">Add New Harvest</button>
                                                 </div>
                                             </div>
                                         </td>
@@ -126,8 +126,12 @@
             <div class="modal-body">
                 <form action="/addplanting" method="post">
                     <div class="mb-3">
+                        <label for="field_id" class="form-label">ID ng Bukid</label>
+                        <input type="text" name="field_id" id="field_id_planting" placeholder="ID ng Bukid" class="form-control" readonly>
+                    </div>
+                    <div class="mb-3">
                         <label for="field_name" class="form-label">Pangalan ng Bukid</label>
-                        <input type="text" name="field_name" id="field_name_add" placeholder="Pangalan ng Bukid" class="form-control">
+                        <input type="text" name="field_name" id="field_name_add" placeholder="Pangalan ng Bukid" class="form-control" readonly>
                     </div>
                     <div class="mb-3">
                         <label for="crop_variety" class="form-label">Pangalang ng Variety</label>
@@ -153,7 +157,7 @@
                         <input type="date" name="end_date" id="end_date" class=" form-control">
                     </div>
                     <div class="mb-3">
-                        <label for="notes" class="form-label">Araw ng Pagtatanim</label>
+                        <label for="notes" class="form-label">Notes</label>
                         <textarea name="notes" id="notes" class=" form-control"></textarea>
                     </div>
                     <div class="modal-footer">
@@ -190,8 +194,12 @@
                         </select>
                     </div>
                     <div class="mb-3">
+                        <label for="field_id" class="form-label">ID ng Bukid</label>
+                        <input type="text" name="field_id" id="field_id_add" class="form-control" readonly>
+                    </div>
+                    <div class="mb-3">
                         <label for="field_name" class="form-label">Pangalan ng Bukid</label>
-                        <input type="text" name="field_name" id="field_nameadd" placeholder="Pangalan ng Bukid" class="form-control">
+                        <input type="text" name="field_name" id="field_nameadd" class="form-control" readonly>
                     </div>
 
                     <div class="mb-3">
@@ -243,8 +251,12 @@
             <div class="modal-body">
                 <form action="/addharvest" method="post">
                     <div class="mb-3">
+                        <label for="field_id" class="form-label">ID ng Bukid</label>
+                        <input type="text" name="field_id" id="field_id_harvest" class="form-control" readonly>
+                    </div>
+                    <div class="mb-3">
                         <label for="field_name" class="form-label">Pangalan ng Bukid</label>
-                        <input type="text" name="field_name" id="field_name_harvest" placeholder="Pangalan ng Bukid" class="form-control">
+                        <input type="text" name="field_name" id="field_name_harvest" class="form-control" readonly>
                     </div>
                     <div class="mb-3">
                         <label for="variety_name" class="form-label">Pangalan ng Variety</label>

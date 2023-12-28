@@ -16,6 +16,7 @@ class DashboardController extends BaseController
     private $harvest;
     private $planting;
     private $worker;
+    private $variety;
     public function __construct()
     {
         $this->field = new \App\Models\VIewFieldsModel();
@@ -23,6 +24,7 @@ class DashboardController extends BaseController
         $this->harvest = new \App\Models\HarvestModel();
         $this->planting = new \App\Models\PlantingModel();
         $this->worker = new \App\Models\WorkerModel();
+        $this->variety = new \App\Models\VarietyModel();
     }
 
     //fields
@@ -31,7 +33,7 @@ class DashboardController extends BaseController
     public function viewfields()
     {
         if (!session()->get('isLoggedIn')) {
-            return redirect()->to('/logins');
+            return redirect()->to('/sign_ins');
         }
         $userId = session()->get('farmer_id');
 
@@ -152,6 +154,7 @@ class DashboardController extends BaseController
         }
 
         $this->planting->save([
+            'field_id' => $this->request->getPost('field_id'),
             'field_name' => $this->request->getPost('field_name'),
             'crop_variety' => $this->request->getPost('crop_variety'),
             'planting_date' => $this->request->getPost('planting_date'),
@@ -243,6 +246,7 @@ class DashboardController extends BaseController
 
         $this->jobs->save([
             'job_name' => $this->request->getPost('job_name'),
+            'field_id' => $this->request->getPost('field_id'),
             'field_name' => $this->request->getPost('field_name'),
             'finished_date' => $this->request->getPost('finished_date'),
             'worker_name' => $this->request->getPost('worker_name'),
@@ -331,6 +335,7 @@ class DashboardController extends BaseController
         }
 
         $this->harvest->save([
+            'field_id' => $this->request->getPost('field_id'),
             'field_name' => $this->request->getPost('field_name'),
             'variety_name' => $this->request->getPost('variety_name'),
             'harvest_quantity' => $this->request->getPost('harvest_quantity'),
@@ -416,6 +421,7 @@ class DashboardController extends BaseController
 
         $validation = $this->validate([
             'worker_name' => 'required',
+            'salaryperday' => 'required',
         ]);
 
         if (!$validation) {
@@ -424,6 +430,7 @@ class DashboardController extends BaseController
 
         $this->worker->save([
             'worker_name' => $this->request->getPost('worker_name'),
+            'salaryperday' => $this->request->getPost('salaryperday'),
             'user_id' => $userId,
         ]);
 
@@ -442,6 +449,7 @@ class DashboardController extends BaseController
 
         $dataToUpdate = [
             'worker_name' => $this->request->getPost('worker_name'),
+            'salaryperday' => $this->request->getPost('salaryperday'),
         ];
 
         $this->worker->update($worker_id, $dataToUpdate);
@@ -459,5 +467,55 @@ class DashboardController extends BaseController
         } else {
             return redirect()->to('/worker')->with('error', 'harvest not found');
         }
+    }
+    public function cropvariety()
+    {
+        $userId = session()->get('farmer_id');
+        if (!session()->get('isLoggedIn')) {
+            return redirect()->to('/sign_ins');
+        } else {
+            $data = [
+                'variety' => $this->variety->where('user_id', $userId)->findAll()
+            ];
+            return view('userfolder/cropvariety', $data);
+        }
+    }
+    public function addnewvariety()
+    {
+        $userId = session()->get('farmer_id');
+        $validation = $this->validate([
+            'variety_name' => 'required',
+            'quantity' => 'required',
+            'date_bought' => 'required',
+            'notes' => 'required',
+        ]);
+
+        if (!$validation) {
+            return view('userfolder/cropvariety', ['validation' => $this->validator]);
+        }
+
+        // Move this part outside of the if statement
+        $this->variety->save([
+            'variety_name' => $this->request->getPost('variety_name'),
+            'variety_price' => $this->request->getPost('variety_price'),
+            'quantity' => $this->request->getPost('quantity'),
+            'date_bought' => $this->request->getPost('date_bought'),
+            'notes' => $this->request->getPost('notes'),
+            'user_id' => $userId,
+        ]);
+
+        return redirect()->to('/cropvariety')->with('success', 'Variety added successfully');
+    }
+    public function adminfields()
+    {
+        if (!session()->get('isLoggedIn')) {
+            return redirect()->to('/sign_ins');
+        }
+
+
+        $data = [
+            'field' => $this->field->findAll()
+        ];
+        return view('adminfolder/fields', $data);
     }
 }
