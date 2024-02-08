@@ -7,7 +7,7 @@ use App\Models\CropRotationModel;
 use App\Models\VIewFieldsModel;
 use App\Models\JobsModel;
 use App\Models\HarvestModel;
-use App\Models\RotationModel;
+use App\Models\FertilizersModel;
 
 class DashboardController extends BaseController
 {
@@ -17,6 +17,9 @@ class DashboardController extends BaseController
     private $planting;
     private $worker;
     private $variety;
+    private $fertilizers;
+    private $equipment;
+
     public function __construct()
     {
         $this->field = new \App\Models\VIewFieldsModel();
@@ -25,6 +28,8 @@ class DashboardController extends BaseController
         $this->planting = new \App\Models\PlantingModel();
         $this->worker = new \App\Models\WorkerModel();
         $this->variety = new \App\Models\VarietyModel();
+        $this->fertilizers = new \App\Models\FertilizersModel();
+        $this->equipment = new \App\Models\EquipmentModel();
     }
 
     //fields
@@ -494,7 +499,6 @@ class DashboardController extends BaseController
             return view('userfolder/cropvariety', ['validation' => $this->validator]);
         }
 
-        // Move this part outside of the if statement
         $this->variety->save([
             'variety_name' => $this->request->getPost('variety_name'),
             'variety_price' => $this->request->getPost('variety_price'),
@@ -505,6 +509,77 @@ class DashboardController extends BaseController
         ]);
 
         return redirect()->to('/cropvariety')->with('success', 'Variety added successfully');
+    }
+    public function fertilizers()
+    {
+        $userId = session()->get('farmer_id');
+        if (!session()->get('isLoggedIn')) {
+            return redirect()->to('/sign_ins');
+        } else {
+            $data = [
+                'fertilizers' => $this->fertilizers->where('user_id', $userId)->findAll()
+            ];
+            return view('userfolder/fertilizers', $data);
+        }
+    }
+    public function addnewfertilizers()
+    {
+        $userId = session()->get('farmer_id');
+        $validation = $this->validate([
+            'fertilizer_name' => 'required',
+            'quantity' => 'required',
+            'date_bought' => 'required',
+            'notes' => 'required',
+        ]);
+
+        if (!$validation) {
+            return view('userfolder/ertilizers', ['validation' => $this->validator]);
+        }
+
+        $this->fertilizers->save([
+            'fertilizer_name' => $this->request->getPost('fertilizer_name'),
+            'price' => $this->request->getPost('price'),
+            'quantity' => $this->request->getPost('quantity'),
+            'date_bought' => $this->request->getPost('date_bought'),
+            'notes' => $this->request->getPost('notes'),
+            'user_id' => $userId,
+        ]);
+
+        return redirect()->to('/fertilizers')->with('success', 'fertilizer added successfully');
+    }
+
+    public function equipment()
+    {
+        $userId = session()->get('farmer_id');
+        if (!session()->get('isLoggedIn')) {
+            return redirect()->to('/sign_ins');
+        } else {
+            $data = [
+                'equipment' => $this->equipment->where('user_id', $userId)->findAll()
+            ];
+            return view('userfolder/equipment', $data);
+        }
+    }
+    public function addnewequipment()
+    {
+        $userId = session()->get('farmer_id');
+        $validation = $this->validate([
+            'equipment_name' => 'required',
+            'date_bought' => 'required',
+            'notes' => 'required',
+        ]);
+
+        if (!$validation) {
+            return view('userfolder/equipment', ['validation' => $this->validator]);
+        }
+
+        $this->equipment->save([
+            'equipment_name' => $this->request->getPost('equipment_name'),
+            'date_bought' => $this->request->getPost('date_bought'),
+            'user_id' => $userId,
+        ]);
+
+        return redirect()->to('/equipment')->with('success', 'equipment added successfully');
     }
     public function adminfields()
     {

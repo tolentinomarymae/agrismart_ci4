@@ -52,6 +52,14 @@ $routes->post('workers/delete/(:num)', 'DashboardController::deleteworker/$1');
 $routes->get('/cropvariety', 'DashboardController::cropvariety', ['filter' => 'authGuard']);
 $routes->post('/addvariety', 'DashboardController::addnewvariety');
 
+// fertilizers
+$routes->get('/fertilizers', 'DashboardController::fertilizers', ['filter' => 'authGuard']);
+$routes->post('/addfertilizers', 'DashboardController::addnewfertilizers');
+
+// equipment
+$routes->get('/equipment', 'DashboardController::equipment', ['filter' => 'authGuard']);
+$routes->post('/addequipment', 'DashboardController::addnewequipment');
+
 // admin dashboard
 
 $routes->get('/admindashboard', 'LoginController::admindashboard', ['filter' => 'authGuard']);
