@@ -14,6 +14,7 @@ class LoginController extends BaseController
     private $user;
     private $planting;
     private $worker;
+    private $variety;
 
     public function __construct()
     {
@@ -23,6 +24,7 @@ class LoginController extends BaseController
         $this->user = new \App\Models\RegisterModel();
         $this->planting = new \App\Models\PlantingModel();
         $this->worker = new \App\Models\WorkerModel();
+        $this->variety = new \App\Models\VarietyModel();
     }
     public function dashboards()
     {
@@ -32,26 +34,33 @@ class LoginController extends BaseController
 
         $userId = session()->get('farmer_id');
 
-        // Get the current year
         $currentYear = date('Y');
 
-        // Sum of harvest_quantity
+
+        // total na naani
         $resultQuantity = $this->harvest
             ->selectSum('harvest_quantity', 'totalHarvestQuantity')
             ->where('user_id', $userId)
             ->get();
-
         $totalHarvestQuantity = $resultQuantity->getRow()->totalHarvestQuantity;
 
-        // Sum of total_revenue for the current year
+
+        // kita ngayong taon
         $resultRevenue = $this->harvest
             ->selectSum('total_revenue', 'totalRevenueThisYear')
             ->where('user_id', $userId)
             ->where('YEAR(harvest_date)', $currentYear)
             ->get();
 
-        $totalRevenueThisYear = $resultRevenue->getRow()->totalRevenueThisYear;
+        // Count of binhi
+        $totalVarieties = $this->variety
+            ->selectSum('quantity', 'totalVarieties')
+            ->where('user_id', $userId)
+            ->get();
+        $totalBinhiCount = $totalVarieties->getRow()->totalVarieties;
 
+
+        $totalRevenueThisYear = $resultRevenue->getRow()->totalRevenueThisYear;
         $harvestData = $this->harvest->where('user_id', $userId)->findAll();
         $revenueData = $this->harvest->where('user_id', $userId)->findAll();
         $workerData = $this->worker->where('user_id', $userId)->findAll();
@@ -60,6 +69,7 @@ class LoginController extends BaseController
             'totalHarvestQuantity' => $totalHarvestQuantity,
             'totalRevenueThisYear' => $totalRevenueThisYear,
             'harvest' => $harvestData,
+            'totalBinhiCount' => $totalBinhiCount,
             'revenue' => $revenueData,
             'worker' => $workerData,
 

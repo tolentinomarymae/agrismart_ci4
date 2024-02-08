@@ -21,7 +21,7 @@
                                     </div>
                                     <div class="single_quick_activity  d-flex">
                                         <div class="count_content count_content2">
-                                            <h3><span class="counter yellow_color">50</span> </h3>
+                                            <h3><span class="counter yellow_color"><?= $totalBinhiCount ?></span> </h3>
                                             <p>Binhi</p>
                                         </div>
                                     </div>
