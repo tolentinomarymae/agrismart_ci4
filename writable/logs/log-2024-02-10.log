@@ -1,0 +1,66 @@
+ERROR - 2024-02-10 10:32:54 --> mysqli_sql_exception: Table 'agrismart.users' doesn't exist in C:\laragon\www\agrismart_ci4\system\Database\MySQLi\Connection.php:306
+Stack trace:
+#0 C:\laragon\www\agrismart_ci4\system\Database\MySQLi\Connection.php(306): mysqli->query('SELECT 1\nFROM `...', 0)
+#1 C:\laragon\www\agrismart_ci4\system\Database\BaseConnection.php(693): CodeIgniter\Database\MySQLi\Connection->execute('SELECT 1\nFROM `...')
+#2 C:\laragon\www\agrismart_ci4\system\Database\BaseConnection.php(607): CodeIgniter\Database\BaseConnection->simpleQuery('SELECT 1\nFROM `...')
+#3 C:\laragon\www\agrismart_ci4\system\Database\BaseBuilder.php(1615): CodeIgniter\Database\BaseConnection->query('SELECT 1\nFROM `...', Array, false)
+#4 C:\laragon\www\agrismart_ci4\system\Validation\StrictRules\Rules.php(212): CodeIgniter\Database\BaseBuilder->get()
+#5 C:\laragon\www\agrismart_ci4\system\Validation\Validation.php(311): CodeIgniter\Validation\StrictRules\Rules->is_unique('tolentinomaryma...', 'email', Array, NULL, 'email')
+#6 C:\laragon\www\agrismart_ci4\system\Validation\Validation.php(197): CodeIgniter\Validation\Validation->processRules('email', 'email', 'tolentinomaryma...', Array, Array)
+#7 C:\laragon\www\agrismart_ci4\system\Controller.php(152): CodeIgniter\Validation\Validation->run()
+#8 C:\laragon\www\agrismart_ci4\app\Controllers\LoginController.php(221): CodeIgniter\Controller->validate(Array)
+#9 C:\laragon\www\agrismart_ci4\system\CodeIgniter.php(942): App\Controllers\LoginController->signups()
+#10 C:\laragon\www\agrismart_ci4\system\CodeIgniter.php(502): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\LoginController))
+#11 C:\laragon\www\agrismart_ci4\system\CodeIgniter.php(361): CodeIgniter\CodeIgniter->handleRequest(NULL, Object(Config\Cache), false)
+#12 C:\laragon\www\agrismart_ci4\public\index.php(79): CodeIgniter\CodeIgniter->run()
+#13 C:\laragon\www\agrismart_ci4\system\Commands\Server\rewrite.php(47): require_once('C:\\laragon\\www\\...')
+#14 {main}
+CRITICAL - 2024-02-10 10:32:54 --> Table 'agrismart.users' doesn't exist
+in SYSTEMPATH\Database\BaseConnection.php on line 647.
+ 1 SYSTEMPATH\Database\BaseBuilder.php(1615): CodeIgniter\Database\BaseConnection->query('SELECT 1
+FROM `users`
+WHERE `email` = :email:
+ LIMIT 1', [...], false)
+ 2 SYSTEMPATH\Validation\StrictRules\Rules.php(212): CodeIgniter\Database\BaseBuilder->get()
+ 3 SYSTEMPATH\Validation\Validation.php(311): CodeIgniter\Validation\StrictRules\Rules->is_unique('tolentinomarymae1503@gmail.com', 'email', [...], null, 'email')
+ 4 SYSTEMPATH\Validation\Validation.php(197): CodeIgniter\Validation\Validation->processRules('email', 'email', 'tolentinomarymae1503@gmail.com', [...], [...])
+ 5 SYSTEMPATH\Controller.php(152): CodeIgniter\Validation\Validation->run()
+ 6 APPPATH\Controllers\LoginController.php(221): CodeIgniter\Controller->validate([...])
+ 7 SYSTEMPATH\CodeIgniter.php(942): App\Controllers\LoginController->signups()
+ 8 SYSTEMPATH\CodeIgniter.php(502): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\LoginController))
+ 9 SYSTEMPATH\CodeIgniter.php(361): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+10 FCPATH\index.php(79): CodeIgniter\CodeIgniter->run()
+11 SYSTEMPATH\Commands\Server\rewrite.php(47): require_once('C:\\laragon\\www\\agrismart_ci4\\public\\index.php')
+ERROR - 2024-02-10 10:34:40 --> mysqli_sql_exception: Table 'agrismart.users' doesn't exist in C:\laragon\www\agrismart_ci4\system\Database\MySQLi\Connection.php:306
+Stack trace:
+#0 C:\laragon\www\agrismart_ci4\system\Database\MySQLi\Connection.php(306): mysqli->query('SELECT 1\nFROM `...', 0)
+#1 C:\laragon\www\agrismart_ci4\system\Database\BaseConnection.php(693): CodeIgniter\Database\MySQLi\Connection->execute('SELECT 1\nFROM `...')
+#2 C:\laragon\www\agrismart_ci4\system\Database\BaseConnection.php(607): CodeIgniter\Database\BaseConnection->simpleQuery('SELECT 1\nFROM `...')
+#3 C:\laragon\www\agrismart_ci4\system\Database\BaseBuilder.php(1615): CodeIgniter\Database\BaseConnection->query('SELECT 1\nFROM `...', Array, false)
+#4 C:\laragon\www\agrismart_ci4\system\Validation\StrictRules\Rules.php(212): CodeIgniter\Database\BaseBuilder->get()
+#5 C:\laragon\www\agrismart_ci4\system\Validation\Validation.php(311): CodeIgniter\Validation\StrictRules\Rules->is_unique('tolentinomaryma...', 'email', Array, NULL, 'email')
+#6 C:\laragon\www\agrismart_ci4\system\Validation\Validation.php(197): CodeIgniter\Validation\Validation->processRules('email', 'email', 'tolentinomaryma...', Array, Array)
+#7 C:\laragon\www\agrismart_ci4\system\Controller.php(152): CodeIgniter\Validation\Validation->run()
+#8 C:\laragon\www\agrismart_ci4\app\Controllers\LoginController.php(221): CodeIgniter\Controller->validate(Array)
+#9 C:\laragon\www\agrismart_ci4\system\CodeIgniter.php(942): App\Controllers\LoginController->signups()
+#10 C:\laragon\www\agrismart_ci4\system\CodeIgniter.php(502): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\LoginController))
+#11 C:\laragon\www\agrismart_ci4\system\CodeIgniter.php(361): CodeIgniter\CodeIgniter->handleRequest(NULL, Object(Config\Cache), false)
+#12 C:\laragon\www\agrismart_ci4\public\index.php(79): CodeIgniter\CodeIgniter->run()
+#13 C:\laragon\www\agrismart_ci4\system\Commands\Server\rewrite.php(47): require_once('C:\\laragon\\www\\...')
+#14 {main}
+CRITICAL - 2024-02-10 10:34:40 --> Table 'agrismart.users' doesn't exist
+in SYSTEMPATH\Database\BaseConnection.php on line 647.
+ 1 SYSTEMPATH\Database\BaseBuilder.php(1615): CodeIgniter\Database\BaseConnection->query('SELECT 1
+FROM `users`
+WHERE `email` = :email:
+ LIMIT 1', [...], false)
+ 2 SYSTEMPATH\Validation\StrictRules\Rules.php(212): CodeIgniter\Database\BaseBuilder->get()
+ 3 SYSTEMPATH\Validation\Validation.php(311): CodeIgniter\Validation\StrictRules\Rules->is_unique('tolentinomarymae1503@gmail.com', 'email', [...], null, 'email')
+ 4 SYSTEMPATH\Validation\Validation.php(197): CodeIgniter\Validation\Validation->processRules('email', 'email', 'tolentinomarymae1503@gmail.com', [...], [...])
+ 5 SYSTEMPATH\Controller.php(152): CodeIgniter\Validation\Validation->run()
+ 6 APPPATH\Controllers\LoginController.php(221): CodeIgniter\Controller->validate([...])
+ 7 SYSTEMPATH\CodeIgniter.php(942): App\Controllers\LoginController->signups()
+ 8 SYSTEMPATH\CodeIgniter.php(502): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\LoginController))
+ 9 SYSTEMPATH\CodeIgniter.php(361): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+10 FCPATH\index.php(79): CodeIgniter\CodeIgniter->run()
+11 SYSTEMPATH\Commands\Server\rewrite.php(47): require_once('C:\\laragon\\www\\agrismart_ci4\\public\\index.php')

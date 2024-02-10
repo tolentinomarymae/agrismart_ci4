@@ -4,15 +4,15 @@ namespace App\Models;
 
 use CodeIgniter\Model;
 
-class JobsModel extends Model
+class AdminModel extends Model
 {
-    protected $table            = 'jobs';
-    protected $primaryKey       = 'job_id';
+    protected $table            = 'admin';
+    protected $primaryKey       = 'id';
     protected $useAutoIncrement = true;
     protected $returnType       = 'array';
     protected $useSoftDeletes   = false;
     protected $protectFields    = true;
-    protected $allowedFields    = ['job_name', 'field_id', 'field_name', 'finished_date', 'worker_name',  'total_money_spent', 'notes', 'user_id', 'farmer_name'];
+    protected $allowedFields    = ['fullname', 'idnumber', 'email', 'password', 'usertype', 'created_at', 'status', 'token', 'activation_date'];
 
     // Dates
     protected $useTimestamps = false;

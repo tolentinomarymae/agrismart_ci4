@@ -4,6 +4,7 @@ namespace App\Controllers;
 
 use App\Models\RegisterModel;
 use App\Controllers\BaseController;
+use App\Models\AdminModel;
 
 class LoginController extends BaseController
 {
@@ -51,6 +52,7 @@ class LoginController extends BaseController
             ->where('user_id', $userId)
             ->where('YEAR(harvest_date)', $currentYear)
             ->get();
+        $totalRevenueThisYear = $resultRevenue->getRow()->totalRevenueThisYear;
 
         // Count of binhi
         $totalVarieties = $this->variety
@@ -59,8 +61,13 @@ class LoginController extends BaseController
             ->get();
         $totalBinhiCount = $totalVarieties->getRow()->totalVarieties;
 
+        // Total money spent from jobs table
+        $resultMoneySpent = $this->jobs
+            ->selectSum('total_money_spent', 'totalMoneySpent')
+            ->where('user_id', $userId)
+            ->get();
+        $totalMoneySpent = $resultMoneySpent->getRow()->totalMoneySpent;
 
-        $totalRevenueThisYear = $resultRevenue->getRow()->totalRevenueThisYear;
         $harvestData = $this->harvest->where('user_id', $userId)->findAll();
         $revenueData = $this->harvest->where('user_id', $userId)->findAll();
         $workerData = $this->worker->where('user_id', $userId)->findAll();
@@ -70,9 +77,8 @@ class LoginController extends BaseController
             'totalRevenueThisYear' => $totalRevenueThisYear,
             'harvest' => $harvestData,
             'totalBinhiCount' => $totalBinhiCount,
-            'revenue' => $revenueData,
+            'totalMoneySpent' => $totalMoneySpent,
             'worker' => $workerData,
-
         ];
 
         return view('userfolder/dashboard', $data);
@@ -120,7 +126,6 @@ class LoginController extends BaseController
         $farmer_name = $this->request->getVar('farmer_name');
         $password = $this->request->getVar('password');
 
-
         $data = $registermodel->where('farmer_name', $farmer_name)->first();
 
         if ($data) {
@@ -165,10 +170,142 @@ class LoginController extends BaseController
     public function admindashboard()
     {
         if (!session()->get('isLoggedIn')) {
-            return redirect()->to('/sign_ins');
+            return redirect()->to('/signinadmin');
         } else {
 
             return view('adminfolder/dashboard');
         }
+    }
+
+
+    // admin
+
+    public function adminloginauth()
+    {
+        $session = session();
+        $adminmodel = new AdminModel();
+        $fullname = $this->request->getVar('fullname');
+        $password = $this->request->getVar('password');
+
+        $data = $adminmodel->where('fullname', $fullname)->first();
+
+        if ($data) {
+            $authenticatePassword = password_verify($password, $data['password']);
+
+            if ($authenticatePassword) {
+                $ses_data = [
+                    'id' => $data['id'],
+                    'fullname' => $data['fullname'],
+                    'isLoggedIn' => true,
+                    'usertype' => $data['usertype'],
+                ];
+
+                $session->set($ses_data);
+
+                if ($data['usertype'] === 'Admin') {
+                    return redirect()->to('/admindashboard');
+                } else if ($data['usertype'] === 'Farmer') {
+                    return redirect()->to('/dashboards');
+                }
+            } else {
+                $session->setFlashdata('msg', 'Name or Password is incorrect.');
+                return redirect()->to('/signinadmin');
+            }
+        } else {
+            $session->setFlashdata('msg', 'Name or Password is incorrect.');
+            return redirect()->to('/signinadmin');
+        }
+    }
+
+    public function registeradmin()
+    {
+        helper(['form']);
+        $data = [];
+        return view('signin-signup/adminregister', $data);
+    }
+
+    public function sendMail($to, $subject, $message)
+    {
+        $email = \Config\Services::email();
+        $email->setMailType("html");
+        $email->setTo($to);
+        $email->setFrom('marymaetolentino03@gmail.com', $subject);
+        $email->setMessage($message);
+
+        if ($email->send()) {
+            echo 'email sent successfully';
+        } else {
+            $data = $email->printDebugger(['headers']);
+            print($data);
+        }
+    }
+    public function token($length)
+    {
+        $str_result = '0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz';
+        return substr(str_shuffle($str_result), 0, $length);
+    }
+    public function signups()
+    {
+        helper('form');
+        $rules = [
+            'fullname' => 'required|min_length[1]|max_length[100]',
+            'idnumber' => 'required|min_length[1]|max_length[100]',
+            'email' => 'required|min_length[1]|max_length[100]|is_unique[admin.email]',
+            'password' => 'required|min_length[8]|max_length[100]',
+            'repeat_password' => 'matches[password]',
+            'usertype' => 'required|min_length[1]|max_length[100]',
+
+        ];
+
+        if ($this->validate($rules)) {
+            $adminmodel = new AdminModel();
+            $token = $this->token(100);
+            $to = $this->request->getVar('email');
+
+            $data = [
+                'fullname' => $this->request->getVar('fullname'),
+                'idnumber' => $this->request->getVar('idnumber'),
+                'email' => $to,
+                'password' => password_hash($this->request->getVar('password'), PASSWORD_DEFAULT),
+                'usertype' => $this->request->getVar('usertype'),
+                'token' => $token,
+                'status' => 'inactive'
+            ];
+
+            $adminmodel->save($data);
+
+            $subject = 'Please confirm your registration';
+            $message = 'Hi, ' . $this->request->getVar('fullname') . '! Welcome to our website! To continue with your registration, please confirm your account by clicking this <a href="' . base_url('verify/' . $token) . '">link</a>';
+            $this->sendMail($to, $subject, $message);
+
+            return redirect()->to('signinadmin');
+        } else {
+            $data['validation'] = $this->validator;
+            return view('signin-signup/adminregister', $data);
+        }
+    }
+    public function verify($id = null)
+    {
+        $ac = new AdminModel();
+        $acc = $ac->where('token', $id)->first();
+
+        if ($acc) {
+            $data = [
+                'token' => $this->token(100),
+                'status' => 'active'
+            ];
+
+            $ac->set($data)->where('token', $id)->update();
+            $session = session();
+            $session->setFlashdata('msg', 'Account was verified');
+        }
+
+        return redirect()->to('signinadmin');
+    }
+    public function loginadmin()
+    {
+        session()->remove(['id', 'fullname', 'isLoggedIn']);
+        helper(['form']);
+        return view('signin-signup/adminlogin');
     }
 }

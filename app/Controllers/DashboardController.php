@@ -52,7 +52,6 @@ class DashboardController extends BaseController
         $userId = session()->get('farmer_id');
         $username = session()->get('farmer_name');
 
-        // Validate the form data
         $validation = $this->validate([
             'field_name' => 'required',
             'field_address' => 'required',
@@ -60,11 +59,9 @@ class DashboardController extends BaseController
         ]);
 
         if (!$validation) {
-            // Validation failed, return to the form with errors
             return view('userfolder/viewfields', ['validation' => $this->validator]);
         }
 
-        // If validation passes, insert the data into the database
         $this->field->save([
             'field_name' => $this->request->getPost('field_name'),
             'field_owner' => $this->request->getPost('field_owner'),
@@ -75,28 +72,22 @@ class DashboardController extends BaseController
 
         ]);
 
-        // Redirect to a success page or display a success message
         return redirect()->to('/viewfields')->with('success', 'Field added successfully');
     }
 
     public function edit($field_id)
     {
-        // Load the product to be edited from the database
         $model = new VIewFieldsModel();
         $field = $model->find($field_id);
 
-        // Load the edit view with the product data
         return view('field', ['field' => $field]);
     }
     public function update()
     {
-        // Handle the form submission to update the product
         $model = new VIewFieldsModel();
 
-        // Retrieve the field_id from the form input
         $field_id = $this->request->getPost('field_id');
 
-        // Define the data to be updated
         $dataToUpdate = [
             'field_name' => $this->request->getPost('field_name'),
             'field_owner' => $this->request->getPost('field_owner'),
@@ -104,28 +95,21 @@ class DashboardController extends BaseController
             'field_total_area' => $this->request->getPost('field_total_area'),
         ];
 
-        // Update the product in the database using the update() method
         $model->update($field_id, $dataToUpdate);
 
-        // Redirect back to the product list or a success page
         return redirect()->to('/viewfields')->with('success', 'Field updated successfully');
     }
     public function deleteProduct($field_id)
     {
-        // Load the model
         $model = new VIewFieldsModel();
 
-        // Check if the product with the given field_ID exists
         $field = $model->find($field_id);
 
         if ($field) {
-            // Delete the field from the database
             $model->delete($field_id);
 
-            // Redirect back to the field list with a success message
             return redirect()->to('/viewfields')->with('success', 'field deleted successfully');
         } else {
-            // Redirect back to the field list with an error message if the field doesn't exist
             return redirect()->to('/viewfields')->with('error', 'field not found');
         }
     }
@@ -154,7 +138,6 @@ class DashboardController extends BaseController
         ]);
 
         if (!$validation) {
-            // Validation failed, return to the form with errors
             return view('userfolder/viewfields', ['validation' => $this->validator]);
         }
 
@@ -185,7 +168,6 @@ class DashboardController extends BaseController
 
         $planting_id = $this->request->getPost('planting_id');
 
-        // Define the data to be updated
         $dataToUpdate = [
             'field_name' => $this->request->getPost('field_name'),
             'crop_variety' => $this->request->getPost('crop_variety'),
@@ -239,8 +221,6 @@ class DashboardController extends BaseController
             'field_name' => 'required',
             'finished_date' => 'required',
             'worker_name' => 'required',
-            'equipment_use' => 'required',
-            'quantity_use' => 'required',
             'total_money_spent' => 'required',
             'notes' => 'required',
         ]);
@@ -255,8 +235,6 @@ class DashboardController extends BaseController
             'field_name' => $this->request->getPost('field_name'),
             'finished_date' => $this->request->getPost('finished_date'),
             'worker_name' => $this->request->getPost('worker_name'),
-            'equipment_use' => $this->request->getPost('equipment_use'),
-            'quantity_use' => $this->request->getPost('quantity_use'),
             'total_money_spent' => $this->request->getPost('total_money_spent'),
             'notes' => $this->request->getPost('notes'),
             'user_id' => $userId,
@@ -281,14 +259,11 @@ class DashboardController extends BaseController
 
         $job_id = $this->request->getPost('job_id');
 
-        // Define the data to be updated
         $dataToUpdate = [
             'job_name' => $this->request->getPost('job_name'),
             'field_name' => $this->request->getPost('field_name'),
             'finished_date' => $this->request->getPost('finished_date'),
             'worker_name' => $this->request->getPost('worker_name'),
-            'equipment_use' => $this->request->getPost('equipment_use'),
-            'quantity_use' => $this->request->getPost('quantity_use'),
             'total_money_spent' => $this->request->getPost('total_money_spent'),
             'notes' => $this->request->getPost('notes'),
         ];
@@ -350,29 +325,23 @@ class DashboardController extends BaseController
             'user_id' => $userId,
         ]);
 
-        // Redirect to a success page or display a success message
         return redirect()->to('/harvest')->with('success', 'Harvest added successfully');
     }
 
 
     public function editharvest($harvest_id)
     {
-        // Load the product to be edited from the database
         $model = new HarvestModel();
         $harvest = $model->find($harvest_id);
 
-        // Load the edit view with the product data
         return view('harvest', ['harvest' => $harvest]);
     }
     public function updateharvest()
     {
-        // Handle the form submission to update the product
         $model = new HarvestModel();
 
-        // Retrieve the field_id from the form input
         $harvest_id = $this->request->getPost('harvest_id');
 
-        // Define the data to be updated
         $dataToUpdate = [
             'field_name' => $this->request->getPost('field_name'),
             'variety_name' => $this->request->getPost('variety_name'),
@@ -382,28 +351,21 @@ class DashboardController extends BaseController
             'notes' => $this->request->getPost('notes'),
         ];
 
-        // Update the product in the database using the update() method
         $model->update($harvest_id, $dataToUpdate);
 
-        // Redirect back to the product list or a success page
         return redirect()->to('/harvest')->with('success', 'Harvest updated successfully');
     }
     public function deleteHarvest($harvest_id)
     {
-        // Load the model
         $model = new HarvestModel();
 
-        // Check if the product with the given field_ID exists
         $jobs = $model->find($harvest_id);
 
         if ($jobs) {
-            // Delete the jobs from the database
             $model->delete($harvest_id);
 
-            // Redirect back to the jobs list with a success message
             return redirect()->to('/harvest')->with('success', 'Harvest deleted successfully');
         } else {
-            // Redirect back to the jobs list with an error message if the jobs doesn't exist
             return redirect()->to('/harvest')->with('error', 'harvest not found');
         }
     }
@@ -566,7 +528,6 @@ class DashboardController extends BaseController
         $validation = $this->validate([
             'equipment_name' => 'required',
             'date_bought' => 'required',
-            'notes' => 'required',
         ]);
 
         if (!$validation) {
@@ -584,7 +545,7 @@ class DashboardController extends BaseController
     public function adminfields()
     {
         if (!session()->get('isLoggedIn')) {
-            return redirect()->to('/sign_ins');
+            return redirect()->to('/signinadmin');
         }
 
 

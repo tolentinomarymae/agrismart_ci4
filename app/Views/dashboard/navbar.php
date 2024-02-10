@@ -11,13 +11,8 @@
             <span>Dashboard</span>
         </li>
         <li>
-            <a class="has-arrow" href="#" aria-expanded="false">
-                <img src="img/menu-icon/1.svg" alt>
-                <span>Dashboard</span>
-            </a>
-            <ul>
-                <li><a href="/dashboards">View Data Center</a></li>
-            </ul>
+        <li><a href="/dashboards" style="margin-left: 40px;">Dashboard</a></li>
+
         </li>
         <li class="side_menu_title">
             <span>Fields</span>
@@ -28,38 +23,17 @@
                 <span>Fields</span>
             </a>
             <ul>
-                <li><a href="/viewfields">View Fields</a></li>
+                <li><a href="/viewfields">View Your Fields</a></li>
+                <li><a href="/maps">View Map</a></li>
             </ul>
         </li>
         <li class="side_menu_title">
             <span>About Fields</span>
         </li>
         <li class>
-            <a class="has-arrow" href="#" aria-expanded="false">
-                <img src="img/menu-icon/2.svg" alt>
-                <span>Crop Planting</span>
-            </a>
-            <ul>
-                <li><a href="/cropplanting">Crop Planting</a></li>
-            </ul>
-        </li>
-        <li class>
-            <a class="has-arrow" href="#" aria-expanded="false">
-                <img src="img/menu-icon/2.svg" alt>
-                <span>Jobs</span>
-            </a>
-            <ul>
-                <li><a href="/jobs">Jobs</a></li>
-            </ul>
-        </li>
-        <li class>
-            <a class="has-arrow" href="#" aria-expanded="false">
-                <img src="img/menu-icon/2.svg" alt>
-                <span>Harvest</span>
-            </a>
-            <ul>
-                <li><a href="/harvest">Add Harvest</a></li>
-            </ul>
+        <li><a href="/cropplanting" style="margin-left: 40px;">Planting</a></li>
+        <li><a href="/jobs" style="margin-left: 40px;">Jobs</a></li>
+        <li><a href="/harvest" style="margin-left: 40px;">Harvest</a></li>
         </li>
         <li class="side_menu_title">
             <span>Data Analytics</span>
@@ -98,7 +72,6 @@
                 <li><a href="/workers">Workers</a></li>
                 <li><a href="/cropvariety">Crop Variety</a></li>
                 <li><a href="/fertilizers">Fertilizers</a></li>
-                <li><a href="/equipment">Equipment</a></li>
                 <li><a href="/otherexpenses">Other Expenses</a></li>
             </ul>
         </li>

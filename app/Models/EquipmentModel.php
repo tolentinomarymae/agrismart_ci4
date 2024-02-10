@@ -12,7 +12,7 @@ class EquipmentModel extends Model
     protected $returnType       = 'array';
     protected $useSoftDeletes   = false;
     protected $protectFields    = true;
-    protected $allowedFields    = ['equipment_name', 'date_bought'];
+    protected $allowedFields    = ['equipment_name', 'date_bought', 'user_id'];
 
     // Dates
     protected $useTimestamps = false;

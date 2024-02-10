@@ -60,6 +60,19 @@ $routes->post('/addfertilizers', 'DashboardController::addnewfertilizers');
 $routes->get('/equipment', 'DashboardController::equipment', ['filter' => 'authGuard']);
 $routes->post('/addequipment', 'DashboardController::addnewequipment');
 
+// chart
+
+$routes->get('/getChartData', 'LoginController::getChartData');
+
+// admin register and email verification
+$routes->post('/adminloginauth', 'LoginController::adminloginauth');
+$routes->get('/registeradmin', 'LoginController::registeradmin');
+$routes->match(['get', 'post'], '/signups', 'LoginController::signups');
+$routes->match(['get', 'post'], 'verify/(:any)', 'LoginController::verify/$1');
+$routes->get('/signinadmin', 'LoginController::loginadmin');
+
+
+
 // admin dashboard
 
 $routes->get('/admindashboard', 'LoginController::admindashboard', ['filter' => 'authGuard']);

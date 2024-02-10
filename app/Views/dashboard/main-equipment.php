@@ -36,7 +36,6 @@
                                         <tr>
                                             <td><?= $equip['equipment_name'] ?></td>
                                             <td><?= $equip['date_bought'] ?></td>
-                                            <td><?= $equip['notes'] ?></td>
                                             <td>
                                                 <div class="btn-group">
                                                     <button type="button" class="btn btn-primary dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" style="background-color: #88c431; border: none;">
@@ -46,8 +45,7 @@
                                                         <button type="button" class="dropdown-item" onclick="openEditfereityModal(
                                                         <?= $equip['equipment_id']; ?>,
                                                         '<?= $equip['equipment_name']; ?>',
-                                                        '<?= $equip['date_bought']; ?>',
-                                                        '<?= $equip['notes']; ?>',
+                                                        '<?= $equip['date_bought']; ?>', 
                                                         )">Edit</button>
                                                         <button type="button" class="dropdown-item" onclick="deleteferiety(<?= $equip['equipment_id']; ?>)">Delete</button>
                                                     </div>

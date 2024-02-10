@@ -211,16 +211,8 @@
                         <input type="text" name="worker_name" id="worker_name" placeholder="Pangalan ng Magtatrabaho" class="form-control">
                     </div>
                     <div class="mb-3">
-                        <label for="equipment_use" class="form-label">Kagamitan</label>
-                        <input type="text" name="equipment_use" id="equipment_use" placeholder="Kagamitan" class="form-control">
-                    </div>
-                    <div class="mb-3">
-                        <label for="quantity_use" class="form-label">Bilang ng Ginamit</label>
-                        <input type="text" name="quantity_use" id="quantity_use" placeholder="Bilang ng Ginamit" class="form-control">
-                    </div>
-                    <div class="mb-3">
                         <label for="total_money_spent" class="form-label">Total na Nagastos</label>
-                        <input type="text" name="total_money_spent" id="total_money_spent" placeholder="Total na Nagastos" class="form-control">
+                        <input type="number" name="total_money_spent" id="total_money_spent" placeholder="Total na Nagastos" class="form-control">
                     </div>
                     <div class="mb-3">
                         <label for="notes" class="form-label">Notes</label>
@@ -296,7 +288,7 @@
     <div class="modal-dialog modal-dialog-centered">
         <div class="modal-content">
             <div class="modal-header">
-                <h5 class="modal-title" id="editfieldmodalLabel">Edit Product</h5>
+                <h5 class="modal-title" id="editfieldmodalLabel">Edit Field</h5>
                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
             <div class="modal-body">

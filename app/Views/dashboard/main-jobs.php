@@ -27,8 +27,6 @@
                                         <th scope="col">Pangalan ng Bukid</th>
                                         <th scope="col">Araw</th>
                                         <th scope="col">Pangalan ng Magtatrabaho</th>
-                                        <th scope="col">Kagamitan</th>
-                                        <th scope="col">Bilang ng Ginamit</th>
                                         <th scope="col">Total na Nagastos</th>
                                         <th scope="col">Notes</th>
                                         <th scope="col">Aksyon</th>
@@ -41,8 +39,6 @@
                                             <td><?= $job['field_name'] ?></td>
                                             <td><?= $job['finished_date'] ?></td>
                                             <td><?= $job['worker_name'] ?></td>
-                                            <td><?= $job['equipment_use'] ?></td>
-                                            <td><?= $job['quantity_use'] ?></td>
                                             <td><?= $job['total_money_spent'] ?></td>
                                             <td><?= $job['notes'] ?></td>
 
@@ -57,9 +53,7 @@
                                                             '<?= $job['job_name']; ?>',
                                                             '<?= $job['field_name']; ?>',
                                                             '<?= $job['finished_date']; ?>',
-                                                            '<?= $job['worker_name']; ?>',
-                                                            '<?= $job['equipment_use']; ?>',
-                                                            '<?= $job['quantity_use']; ?>',
+                                                            '<?= $job['worker_name']; ?>', 
                                                             '<?= $job['total_money_spent']; ?>',
                                                             '<?= $job['notes']; ?>',
 
@@ -117,14 +111,6 @@
                         <input type="text" name="worker_name" id="worker_name" placeholder="Pangalan ng Magtatrabaho" class="form-control">
                     </div>
                     <div class="mb-3">
-                        <label for="equipment_use" class="form-label">Kagamitan</label>
-                        <input type="text" name="equipment_use" id="equipment_use" placeholder="Kagamitan" class="form-control">
-                    </div>
-                    <div class="mb-3">
-                        <label for="quantity_use" class="form-label">Bilang ng Ginamit</label>
-                        <input type="text" name="quantity_use" id="quantity_use" placeholder="Bilang ng Ginamit" class="form-control">
-                    </div>
-                    <div class="mb-3">
                         <label for="total_money_spent" class="form-label">Total na Nagastos</label>
                         <input type="text" name="total_money_spent" id="total_money_spent" placeholder="Total na Nagastos" class="form-control">
                     </div>
@@ -170,14 +156,6 @@
                     <div class="mb-3">
                         <label for="editworker_name" class="form-label">Pangalan ng Magtatrabaho</label>
                         <input type="text" name="worker_name" id="editworker_name" class="form-control">
-                    </div>
-                    <div class="mb-3">
-                        <label for="editequipment_use" class="form-label">Kagamitan</label>
-                        <input type="text" name="equipment_use" id="editequipment_use" class="form-control">
-                    </div>
-                    <div class="mb-3">
-                        <label for="editquantity_use" class="form-label">Bilang ng Kagamitan</label>
-                        <input type="text" name="quantity_use" id="editquantity_use" class="form-control">
                     </div>
                     <div class="mb-3">
                         <label for="edittotal_money_spent" class="form-label">Total na Nagastos</label>

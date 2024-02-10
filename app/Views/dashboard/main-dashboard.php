@@ -27,7 +27,7 @@
                                     </div>
                                     <div class="single_quick_activity  d-flex">
                                         <div class="count_content count_content2">
-                                            <h3><span class="counter green_color">21100</span> </h3>
+                                            <h3><span class="counter green_color"><?= $totalMoneySpent ?></span> </h3>
                                             <p>Nagastos</p>
                                         </div>
                                     </div>
@@ -74,18 +74,43 @@
                         </div>
                     </div>
                     <div id="bar_wev"></div>
-                    <div class="col-xl-12">
-                        <div class="white_box mb_30">
-                            <div class="box_header ">
-                                <div class="main-title">
-                                    <h3 class="mb-0">Line Chart</h3>
-                                </div>
-                            </div>
-                            <canvas style="height: 250px" id="lineChart"></canvas>
-                        </div>
+
+                    <div class="my-4">
+                        <div class="title">Line Chart</div>
+                        <canvas id="revenueChart" width="400" height="300"></canvas>
                     </div>
                 </div>
             </div>
         </div>
     </div>
-</div>
+</div><canvas id="revenueChart" width="800" height="400"></canvas>
+
+<script>
+    var ctx = document.getElementById('revenueChart').getContext('2d');
+    var totalRevenueThisYear = <?= $totalRevenueThisYear; ?>;
+
+    var chart = new Chart(ctx, {
+        type: 'line',
+        data: {
+            labels: totalRevenueThisYear.map(item => item.year),
+            datasets: [{
+                label: 'Total Revenue per Year',
+                data: totalRevenueThisYear.map(item => item.totalRevenueThisYear),
+                backgroundColor: 'rgba(75, 192, 192, 0.2)',
+                borderColor: 'rgba(75, 192, 192, 1)',
+                borderWidth: 1
+            }]
+        },
+        options: {
+            scales: {
+                x: {
+                    type: 'linear',
+                    position: 'bottom'
+                },
+                y: {
+                    min: 0
+                }
+            }
+        }
+    });
+</script>
