@@ -40,11 +40,11 @@
                     <form action="/adminloginauth" method="post" class="px-3">
                         <div class="form-input">
                             <span><i class="fa fa-user"></i></span>
-                            <input type="text" name="fullname" id="fullname" placeholder="Buong Pangalan" tabindex="10" required>
+                            <input type="text" name="fullname" value="<?= set_value('fullname') ?>" placeholder="Buong Pangalan" tabindex="10" required>
                         </div>
                         <div class="form-input">
                             <span><i class="fa fa-lock"></i></span>
-                            <input type="password" name="password" id="password" placeholder="Password" required>
+                            <input type="password" name="password" placeholder="Password" required>
                         </div>
                         <div class="mb-3">
                             <button type="submit" class="btn btn-block">Login</button>

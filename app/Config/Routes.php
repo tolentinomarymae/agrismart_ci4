@@ -9,8 +9,8 @@ $routes->get('/', 'LandingpageController::index');
 $routes->get('/dashboards', 'LoginController::dashboards', ['filter' => 'authGuard']);
 $routes->post('/register', 'LoginController::register');
 $routes->get('/registerview', 'LoginController::registerview');
-$routes->get('/sign_ins', 'LoginController::login');
-$routes->post('/loginauth', 'LoginController::loginauth');
+$routes->get('/sign_ins', 'LoginController::login'); //login page ito
+$routes->post('/loginauth', 'LoginController::loginauth'); //authentication
 $routes->match(['post', 'get'], '/dashboards', 'LoginController::dashboards', ['filter' => 'authGuard']);
 
 //fields
@@ -70,10 +70,10 @@ $routes->get('/registeradmin', 'LoginController::registeradmin');
 $routes->match(['get', 'post'], '/signups', 'LoginController::signups');
 $routes->match(['get', 'post'], 'verify/(:any)', 'LoginController::verify/$1');
 $routes->get('/signinadmin', 'LoginController::loginadmin');
+$routes->match(['post', 'get'], '/admindashboard', 'LoginController::admindashboard');
 
 
 
 // admin dashboard
 
-$routes->get('/admindashboard', 'LoginController::admindashboard', ['filter' => 'authGuard']);
 $routes->get('/adminfields', 'DashboardController::adminfields');

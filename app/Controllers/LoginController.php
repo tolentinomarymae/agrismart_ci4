@@ -190,7 +190,8 @@ class LoginController extends BaseController
         $data = $adminmodel->where('fullname', $fullname)->first();
 
         if ($data) {
-            $authenticatePassword = password_verify($password, $data['password']);
+            $pass = $data['password'];
+            $authenticatePassword = password_verify($password, $pass);
 
             if ($authenticatePassword) {
                 $ses_data = [
@@ -201,6 +202,7 @@ class LoginController extends BaseController
                 ];
 
                 $session->set($ses_data);
+                log_message('info', 'User logged in successfully: ' . $fullname);
 
                 if ($data['usertype'] === 'Admin') {
                     return redirect()->to('/admindashboard');
@@ -208,11 +210,13 @@ class LoginController extends BaseController
                     return redirect()->to('/dashboards');
                 }
             } else {
-                $session->setFlashdata('msg', 'Name or Password is incorrect.');
+                $session->setFlashdata('msg', 'Password is incorrect.');
+                log_message('error', 'Failed login attempt for user: ' . $fullname);
                 return redirect()->to('/signinadmin');
             }
         } else {
-            $session->setFlashdata('msg', 'Name or Password is incorrect.');
+            $session->setFlashdata('msg', 'User does not exist.');
+            log_message('error', 'Failed login attempt for non-existent user: ' . $fullname);
             return redirect()->to('/signinadmin');
         }
     }
