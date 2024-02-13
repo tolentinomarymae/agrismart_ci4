@@ -1,0 +1,48 @@
+CRITICAL - 2024-02-12 11:38:10 --> Undefined variable $prof
+in APPPATH\Views\dashboard\mainaddprofile.php on line 7.
+ 1 APPPATH\Views\dashboard\mainaddprofile.php(7): CodeIgniter\Debug\Exceptions->errorHandler(2, 'Undefined variable $prof', 'C:\\laragon\\www\\agrismart_ci4\\app\\Views\\dashboard\\mainaddprofile.php', 7)
+ 2 SYSTEMPATH\View\View.php(228): include('C:\\laragon\\www\\agrismart_ci4\\app\\Views\\dashboard\\mainaddprofile.php')
+ 3 SYSTEMPATH\View\View.php(231): CodeIgniter\View\View->CodeIgniter\View\{closure}()
+ 4 SYSTEMPATH\View\View.php(469): CodeIgniter\View\View->render('/dashboard/mainaddprofile', null, true)
+ 5 APPPATH\Views\userfolder\addprofile.php(6): CodeIgniter\View\View->include('/dashboard/mainaddprofile')
+ 6 SYSTEMPATH\View\View.php(228): include('C:\\laragon\\www\\agrismart_ci4\\app\\Views\\userfolder\\addprofile.php')
+ 7 SYSTEMPATH\View\View.php(231): CodeIgniter\View\View->CodeIgniter\View\{closure}()
+ 8 SYSTEMPATH\Common.php(1190): CodeIgniter\View\View->render('userfolder/addprofile', [], true)
+ 9 APPPATH\Controllers\DashboardController.php(564): view('userfolder/addprofile', [])
+10 SYSTEMPATH\CodeIgniter.php(942): App\Controllers\DashboardController->addprofile()
+11 SYSTEMPATH\CodeIgniter.php(502): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\DashboardController))
+12 SYSTEMPATH\CodeIgniter.php(361): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+13 FCPATH\index.php(79): CodeIgniter\CodeIgniter->run()
+14 SYSTEMPATH\Commands\Server\rewrite.php(47): require_once('C:\\laragon\\www\\agrismart_ci4\\public\\index.php')
+CRITICAL - 2024-02-12 11:44:26 --> Undefined variable $pro
+in APPPATH\Views\dashboard\mainaddprofile.php on line 16.
+ 1 APPPATH\Views\dashboard\mainaddprofile.php(16): CodeIgniter\Debug\Exceptions->errorHandler(2, 'Undefined variable $pro', 'C:\\laragon\\www\\agrismart_ci4\\app\\Views\\dashboard\\mainaddprofile.php', 16)
+ 2 SYSTEMPATH\View\View.php(228): include('C:\\laragon\\www\\agrismart_ci4\\app\\Views\\dashboard\\mainaddprofile.php')
+ 3 SYSTEMPATH\View\View.php(231): CodeIgniter\View\View->CodeIgniter\View\{closure}()
+ 4 SYSTEMPATH\View\View.php(469): CodeIgniter\View\View->render('/dashboard/mainaddprofile', null, true)
+ 5 APPPATH\Views\userfolder\addprofile.php(6): CodeIgniter\View\View->include('/dashboard/mainaddprofile')
+ 6 SYSTEMPATH\View\View.php(228): include('C:\\laragon\\www\\agrismart_ci4\\app\\Views\\userfolder\\addprofile.php')
+ 7 SYSTEMPATH\View\View.php(231): CodeIgniter\View\View->CodeIgniter\View\{closure}()
+ 8 SYSTEMPATH\Common.php(1190): CodeIgniter\View\View->render('userfolder/addprofile', [], true)
+ 9 APPPATH\Controllers\DashboardController.php(570): view('userfolder/addprofile', [...])
+10 SYSTEMPATH\CodeIgniter.php(942): App\Controllers\DashboardController->addprofile()
+11 SYSTEMPATH\CodeIgniter.php(502): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\DashboardController))
+12 SYSTEMPATH\CodeIgniter.php(361): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+13 FCPATH\index.php(79): CodeIgniter\CodeIgniter->run()
+14 SYSTEMPATH\Commands\Server\rewrite.php(47): require_once('C:\\laragon\\www\\agrismart_ci4\\public\\index.php')
+CRITICAL - 2024-02-12 11:59:12 --> Undefined variable $prof
+in APPPATH\Controllers\DashboardController.php on line 564.
+ 1 APPPATH\Controllers\DashboardController.php(564): CodeIgniter\Debug\Exceptions->errorHandler(2, 'Undefined variable $prof', 'C:\\laragon\\www\\agrismart_ci4\\app\\Controllers\\DashboardController.php', 564)
+ 2 SYSTEMPATH\CodeIgniter.php(942): App\Controllers\DashboardController->addprofile()
+ 3 SYSTEMPATH\CodeIgniter.php(502): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\DashboardController))
+ 4 SYSTEMPATH\CodeIgniter.php(361): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 5 FCPATH\index.php(79): CodeIgniter\CodeIgniter->run()
+ 6 SYSTEMPATH\Commands\Server\rewrite.php(47): require_once('C:\\laragon\\www\\agrismart_ci4\\public\\index.php')
+CRITICAL - 2024-02-12 11:59:45 --> Undefined variable $prof
+in APPPATH\Controllers\DashboardController.php on line 564.
+ 1 APPPATH\Controllers\DashboardController.php(564): CodeIgniter\Debug\Exceptions->errorHandler(2, 'Undefined variable $prof', 'C:\\laragon\\www\\agrismart_ci4\\app\\Controllers\\DashboardController.php', 564)
+ 2 SYSTEMPATH\CodeIgniter.php(942): App\Controllers\DashboardController->addprofile()
+ 3 SYSTEMPATH\CodeIgniter.php(502): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\DashboardController))
+ 4 SYSTEMPATH\CodeIgniter.php(361): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 5 FCPATH\index.php(79): CodeIgniter\CodeIgniter->run()
+ 6 SYSTEMPATH\Commands\Server\rewrite.php(47): require_once('C:\\laragon\\www\\agrismart_ci4\\public\\index.php')

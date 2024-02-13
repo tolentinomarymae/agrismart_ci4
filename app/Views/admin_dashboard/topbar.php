@@ -24,7 +24,7 @@
                         <div class="profile_info">
                             <i class="fa-solid fa-user fa-2xl " style="align-self: center; color: #88c431; margin-right: 20px;"></i>
                             <div class="profile_info_iner">
-                                <h5><?php echo session()->get('farmer_name'); ?></h5>
+                                <h5><?php echo session()->get('fullname'); ?></h5>
                                 <div class="profile_info_details">
                                     <a href="#">My Profile <i class="fa-regular fa-user" style="color: white;"></i></a>
                                     <a href="#">Settings <i class="fa-solid fa-gear" style="color: white;"></i></i></a>

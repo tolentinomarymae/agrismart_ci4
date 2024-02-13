@@ -61,8 +61,13 @@ $routes->get('/equipment', 'DashboardController::equipment', ['filter' => 'authG
 $routes->post('/addequipment', 'DashboardController::addnewequipment');
 
 // chart
-
 $routes->get('/getChartData', 'LoginController::getChartData');
+
+// profile
+$routes->get('/addprofile', 'DashboardController::addprofile');
+$routes->post('/addfarmerprofile', 'DashboardController::addfarmerprofile');
+
+
 
 // admin register and email verification
 $routes->post('/adminloginauth', 'LoginController::adminloginauth');
@@ -75,5 +80,4 @@ $routes->match(['post', 'get'], '/admindashboard', 'LoginController::admindashbo
 
 
 // admin dashboard
-
 $routes->get('/adminfields', 'DashboardController::adminfields');

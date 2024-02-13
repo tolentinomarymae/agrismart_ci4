@@ -5,3 +5,20 @@ ERROR - 2024-02-11 07:55:17 --> Failed login attempt for non-existent user: Mary
 ERROR - 2024-02-11 07:55:35 --> Failed login attempt for user: Charmel Montellano
 ERROR - 2024-02-11 07:55:46 --> Failed login attempt for user: Charmel Montellano
 ERROR - 2024-02-11 07:59:22 --> Failed login attempt for user: Charmel Montellano
+ERROR - 2024-02-11 11:30:28 --> Failed login attempt for non-existent user: Queenie De Guzman
+CRITICAL - 2024-02-11 13:16:35 --> Undefined variable $prof
+in APPPATH\Views\dashboard\mainaddprofile.php on line 5.
+ 1 APPPATH\Views\dashboard\mainaddprofile.php(5): CodeIgniter\Debug\Exceptions->errorHandler(2, 'Undefined variable $prof', 'C:\\laragon\\www\\agrismart_ci4\\app\\Views\\dashboard\\mainaddprofile.php', 5)
+ 2 SYSTEMPATH\View\View.php(228): include('C:\\laragon\\www\\agrismart_ci4\\app\\Views\\dashboard\\mainaddprofile.php')
+ 3 SYSTEMPATH\View\View.php(231): CodeIgniter\View\View->CodeIgniter\View\{closure}()
+ 4 SYSTEMPATH\View\View.php(469): CodeIgniter\View\View->render('/dashboard/mainaddprofile', null, true)
+ 5 APPPATH\Views\userfolder\addprofile.php(6): CodeIgniter\View\View->include('/dashboard/mainaddprofile')
+ 6 SYSTEMPATH\View\View.php(228): include('C:\\laragon\\www\\agrismart_ci4\\app\\Views\\userfolder\\addprofile.php')
+ 7 SYSTEMPATH\View\View.php(231): CodeIgniter\View\View->CodeIgniter\View\{closure}()
+ 8 SYSTEMPATH\Common.php(1190): CodeIgniter\View\View->render('userfolder/addprofile', [], true)
+ 9 APPPATH\Controllers\DashboardController.php(562): view('userfolder/addprofile', [])
+10 SYSTEMPATH\CodeIgniter.php(942): App\Controllers\DashboardController->addprofile()
+11 SYSTEMPATH\CodeIgniter.php(502): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\DashboardController))
+12 SYSTEMPATH\CodeIgniter.php(361): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+13 FCPATH\index.php(79): CodeIgniter\CodeIgniter->run()
+14 SYSTEMPATH\Commands\Server\rewrite.php(47): require_once('C:\\laragon\\www\\agrismart_ci4\\public\\index.php')

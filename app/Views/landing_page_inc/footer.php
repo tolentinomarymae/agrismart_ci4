@@ -25,7 +25,7 @@
 						<li><a href="">Home</a></li>
 						<li><a href="">About</a></li>
 						<li><a href="/registeradmin">Sign up as Admin</a></li>
-						<li><a href="/logins">Log In</a></li>
+						<li><a href="/signinadmin">Log In as Admin</a></li>
 						<li><a href="">Contact</a></li>
 					</ul>
 				</div>

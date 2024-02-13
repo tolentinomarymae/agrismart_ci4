@@ -29,26 +29,15 @@
             </a>
             <ul>
                 <li><a href="/adminfields">View Fields</a></li>
+                <li><a href="/maps">View Maps</a></li>
             </ul>
         </li>
         <li class="side_menu_title">
             <span>About Fields</span>
         </li>
-        <li class>
-            <a class="has-arrow" href="" aria-expanded="false">
-                <img src="img/menu-icon/2.svg" alt>
-                <span>Crop Rotation</span>
-            </a>
-        </li>
-        <li class>
-            <a class="has-arrow" href="#" aria-expanded="false">
-                <img src="img/menu-icon/2.svg" alt>
-                <span>Harvest</span>
-            </a>
-            <ul>
-                <li><a href="">Harvest</a></li>
-            </ul>
-        </li>
+        <li><a href="/admincropplanting" style="margin-left: 40px;">Planting</a></li>
+        <li><a href="/admincharvest" style="margin-left: 40px;">Harvest</a></li>
+
         <li class="side_menu_title">
             <span>Data Analytics</span>
         </li>

@@ -59,7 +59,7 @@
                 <span>My Profile</span>
             </a>
             <ul>
-                <li><a href="">Add Profile</a></li>
+                <li><a href="/addprofile">Add Profile</a></li>
                 <li><a href="">See Profile</a></li>
             </ul>
         </li>

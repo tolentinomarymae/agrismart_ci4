@@ -178,7 +178,7 @@ ol {
 
 p {
     line-height: 24px;
-    font-size: 14px;
+    font-size: 10px;
     margin-bottom: 0;
     color: #828bb2;
     font-family: poppins, sans-serif;
@@ -3145,10 +3145,10 @@ table.dataTable {
 }
 
 .sidebar #sidebar_menu li a {
-    font-size: 16px;
+    font-size: 14px;
     font-weight: 400;
     color: #676b84;
-    padding: 15px 25px 15px 30px;
+    padding: 15px 25px 15px 15px;
     background: #fff;
     transition: .3s;
     position: relative;
@@ -3169,7 +3169,7 @@ table.dataTable {
 
 .sidebar #sidebar_menu li a i {
     font-size: 15px;
-    margin-right: 12px;
+    margin-right: 5px;
     color: #a5adc6;
     -webkit-transition: .5s;
     transition: .5s
