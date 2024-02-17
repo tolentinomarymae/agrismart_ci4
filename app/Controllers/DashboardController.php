@@ -544,17 +544,7 @@ class DashboardController extends BaseController
 
         return redirect()->to('/equipment')->with('success', 'equipment added successfully');
     }
-    public function adminfields()
-    {
-        if (!session()->get('isLoggedIn')) {
-            return redirect()->to('/signinadmin');
-        }
 
-        $data = [
-            'field' => $this->field->findAll()
-        ];
-        return view('adminfolder/fields', $data);
-    }
     public function addprofile()
     {
         if (!session()->get('isLoggedIn')) {
@@ -650,5 +640,51 @@ class DashboardController extends BaseController
         $session->set('prof', $prof);
 
         return redirect()->to('/addprofile')->with('success', 'Profile added successfully');
+    }
+    public function adminfields()
+    {
+        if (!session()->get('isLoggedIn')) {
+            return redirect()->to('/signinadmin');
+        }
+
+        $data = [
+            'field' => $this->field->findAll()
+        ];
+        return view('adminfolder/fields', $data);
+    }
+    public function admincropplanting()
+    {
+        if (!session()->get('isLoggedIn')) {
+            return redirect()->to('/signinadmin');
+        }
+
+        $data = [
+            'planting' => $this->planting->findAll()
+        ];
+        return view('adminfolder/croprotation', $data);
+    }
+    public function adminharvest()
+    {
+        if (!session()->get('isLoggedIn')) {
+            return redirect()->to('/signinadmin');
+        }
+
+        $data = [
+            'harvest' => $this->harvest->findAll()
+        ];
+        return view('adminfolder/harvest', $data);
+    }
+    public function map()
+    {
+
+        $varietyData = $this->variety
+            ->select('variety_id, variety_name')
+            ->findAll();
+
+        $data = [
+            'varietyData' => $varietyData
+        ];
+
+        return view('adminfolder/map', $data);
     }
 }

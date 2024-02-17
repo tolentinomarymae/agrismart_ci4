@@ -41,7 +41,6 @@
                                         <td><?= $fie['field_total_area'] ?></td>
                                         <td>
                                             <button type="button" class="btn btn-primary" style="background-color: #88c431; border: none;">View</button>
-
                                         </td>
                                     </tr>
                                 <?php endforeach; ?>

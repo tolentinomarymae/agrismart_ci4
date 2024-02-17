@@ -29,14 +29,14 @@
             </a>
             <ul>
                 <li><a href="/adminfields">View Fields</a></li>
-                <li><a href="/maps">View Maps</a></li>
+                <li><a href="/map">View Maps</a></li>
             </ul>
         </li>
         <li class="side_menu_title">
             <span>About Fields</span>
         </li>
         <li><a href="/admincropplanting" style="margin-left: 40px;">Planting</a></li>
-        <li><a href="/admincharvest" style="margin-left: 40px;">Harvest</a></li>
+        <li><a href="/adminharvest" style="margin-left: 40px;">Harvest</a></li>
 
         <li class="side_menu_title">
             <span>Data Analytics</span>
@@ -54,30 +54,9 @@
             </ul>
         </li>
         <li class="side_menu_title">
-            <span>My Farm</span>
+            <span>Profile</span>
         </li>
-        <li class>
-            <a class="has-arrow" href="#" aria-expanded="false">
-                <img src="img/menu-icon/4.svg" alt>
-                <span>My Profile</span>
-            </a>
-            <ul>
-                <li><a href="">Add Profile</a></li>
-                <li><a href="">See Profile</a></li>
-            </ul>
-        </li>
-        <li class>
-            <a class="has-arrow" href="#" aria-expanded="false">
-                <img src="img/menu-icon/4.svg" alt>
-                <span>Inventory</span>
-            </a>
-            <ul>
-                <li><a href="">Work Types/Workers</a></li>
-                <li><a href="">Crop Variety</a></li>
-                <li><a href="">Fertilizers</a></li>
-                <li><a href="">Equipment</a></li>
-                <li><a href="">Other Expenses</a></li>
-            </ul>
-        </li>
+        <li><a href="/adminprofile" style="margin-left: 40px;">Profile</a></li>
+
     </ul>
 </nav>

@@ -81,3 +81,8 @@ $routes->match(['post', 'get'], '/admindashboard', 'LoginController::admindashbo
 
 // admin dashboard
 $routes->get('/adminfields', 'DashboardController::adminfields');
+$routes->get('/admincropplanting', 'DashboardController::admincropplanting');
+$routes->get('/adminharvest', 'DashboardController::adminharvest');
+
+$routes->get('/map', 'DashboardController::map');
+$routes->get('/eq', 'DashboardController::eq');

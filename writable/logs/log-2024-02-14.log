@@ -1,0 +1,10 @@
+CRITICAL - 2024-02-14 04:59:24 --> Invalid file: "userfolder/map.php"
+in SYSTEMPATH\Exceptions\FrameworkException.php on line 39.
+ 1 SYSTEMPATH\View\View.php(216): CodeIgniter\Exceptions\FrameworkException::forInvalidFile('userfolder/map.php')
+ 2 SYSTEMPATH\Common.php(1190): CodeIgniter\View\View->render('userfolder/map', [], true)
+ 3 APPPATH\Controllers\DashboardController.php(688): view('userfolder/map', [...])
+ 4 SYSTEMPATH\CodeIgniter.php(942): App\Controllers\DashboardController->map()
+ 5 SYSTEMPATH\CodeIgniter.php(502): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\DashboardController))
+ 6 SYSTEMPATH\CodeIgniter.php(361): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 7 FCPATH\index.php(79): CodeIgniter\CodeIgniter->run()
+ 8 SYSTEMPATH\Commands\Server\rewrite.php(47): require_once('C:\\laragon\\www\\agrismart_ci4\\public\\index.php')
