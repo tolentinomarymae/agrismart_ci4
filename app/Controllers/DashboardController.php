@@ -453,6 +453,8 @@ class DashboardController extends BaseController
     {
         $userId = session()->get('farmer_id');
         $validation = $this->validate([
+            'barangay' => 'required',
+            'equipment' => 'required',
             'variety_name' => 'required',
             'quantity' => 'required',
             'date_bought' => 'required',
@@ -464,6 +466,8 @@ class DashboardController extends BaseController
         }
 
         $this->variety->save([
+            'barangay' => $this->request->getPost('barangay'),
+            'equipment' => $this->request->getPost('equipment'),
             'variety_name' => $this->request->getPost('variety_name'),
             'variety_price' => $this->request->getPost('variety_price'),
             'quantity' => $this->request->getPost('quantity'),
@@ -676,15 +680,16 @@ class DashboardController extends BaseController
     }
     public function map()
     {
+        $barangays = ['Santiago', 'Kalinisan',  'Mabini', 'Adrialuna', 'Antipolo', 'Apitong', 'Arangin', 'Aurora', 'Bacungan', 'Bagong Buhay', 'Bancuro', 'Barcenaga', 'Bayani', 'Buhangin', 'Concepcion', 'Dao', 'Del Pilar', 'Estrella', 'Evangelista', 'Gamao', 'General Esco', 'Herrera', 'Inarawan', 'Laguna', 'Mabini', 'Andres Ilagan', 'Mahabang Parang', 'Malaya', 'Malinao', 'Malvar', 'Masagana', 'Masaguing', 'Melgar A', 'Melgar B', 'Metolza', 'Montelago', 'Montemayor', 'Motoderazo', 'Mulawin', 'Nag-Iba I', 'Nag-Iba II', 'Pagkakaisa', 'Paniquian', 'Pinagsabangan I', 'Pinagsabangan II', 'Pinahan', 'Poblacion I (Barangay I)', 'Poblacion II (Barangay II)', 'Poblacion III (Barangay III)', 'Sampaguita', 'San Agustin I', 'San Agustin II', 'San Andres', 'San Antonio', 'San Carlos', 'San Isidro', 'San Jose', 'San Luis', 'San Nicolas', 'San Pedro', 'Santa Isabel', 'Santa Maria', 'Santiago', 'Santo Nino', 'Tagumpay', 'Tigkan', 'Melgar B', 'Santa Cruz', 'Balite', 'Banuton', 'Caburo', 'Magtibay', 'Paitan'];
+        $varietyData = [];
 
-        $varietyData = $this->variety
-            ->select('variety_id, variety_name')
-            ->findAll();
+        foreach ($barangays as $barangay) {
+            $varietyData[$barangay] = $this->variety
+                ->select('equipment, variety_name')
+                ->where('barangay', $barangay)
+                ->findAll();
+        }
 
-        $data = [
-            'varietyData' => $varietyData
-        ];
-
-        return view('adminfolder/map', $data);
+        return view('adminfolder/map', ['varietyData' => $varietyData]);
     }
 }

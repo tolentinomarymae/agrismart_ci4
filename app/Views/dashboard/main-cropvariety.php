@@ -26,6 +26,8 @@
                             <table class="table lms_table_active">
                                 <thead>
                                     <tr>
+                                        <th scope="col">Barangay</th>
+                                        <th scope="col">Equipment</th>
                                         <th scope="col">Pangalan ng Variety</th>
                                         <th scope="col">Presyo</th>
                                         <th scope="col">Dami</th>
@@ -37,6 +39,8 @@
                                 <tbody>
                                     <?php foreach ($variety as $var) : ?>
                                         <tr>
+                                            <td><?= $var['barangay'] ?></td>
+                                            <td><?= $var['equipment'] ?></td>
                                             <td><?= $var['variety_name'] ?></td>
                                             <td><?= $var['variety_price'] ?></td>
                                             <td><?= $var['quantity'] ?></td>
@@ -49,7 +53,9 @@
                                                     </button>
                                                     <div class="dropdown-menu">
                                                         <button type="button" class="dropdown-item" onclick="openEditVareityModal(
-                                                        <?= $var['variety_id']; ?>,
+                                                        '<?= $var['variety_id']; ?>',
+                                                        '<?= $var['barangay']; ?>',
+                                                        '<?= $var['equipment']; ?>',
                                                         '<?= $var['variety_name']; ?>',
                                                         '<?= $var['variety_price']; ?>',
                                                         '<?= $var['quantity']; ?>',
@@ -72,7 +78,7 @@
     </div>
 </div>
 
-<!-- Add Worker Modal -->
+<!-- Add Variety Modal -->
 <div class="modal fade" id="addvarietymodal" role="dialog" aria-labelledby="addvarietymodalLabel" aria-hidden="true">
     <br>
     <div class="modal-dialog modal-dialog-centered" style="z-index: 10000;">
@@ -83,6 +89,14 @@
             </div>
             <div class="modal-body">
                 <form action="/addvariety" method="post">
+                    <div class="mb-3">
+                        <label for="barangay" class="form-label">Barangay</label>
+                        <input type="text" name="barangay" id="barangay" placeholder="Barangay" class="form-control">
+                    </div>
+                    <div class="mb-3">
+                        <label for="equipment" class="form-label">Kagamitan</label>
+                        <input type="text" name="equipment" id="equipment" placeholder="Kagamitan" class="form-control">
+                    </div>
                     <div class="mb-3">
                         <label for="variety_name" class="form-label">Pangalan ng Variety</label>
                         <input type="text" name="variety_name" id="variety_name" placeholder="Pangalan ng Variety" class="form-control">
@@ -111,32 +125,5 @@
             </div>
         </div>
 
-    </div>
-</div>
-
-<!-- edit_product_modal.php -->
-
-<div class="modal fade" id="editworkermodal" tabindex="-1" aria-labelledby="editworkermodalLabel" aria-hidden="true">
-    <div class="modal-dialog modal-dialog-centered">
-        <div class="modal-content">
-            <div class="modal-header">
-                <h5 class="modal-title" id="editworkermodalLabel">Edit Worker</h5>
-                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-            </div>
-            <div class="modal-body">
-                <form action="/workers/update" method="post">
-                    <input type="hidden" name="worker_id" id="editworker_id">
-                    <div class="mb-3">
-                        <label for="editworker_name" class="form-label">Pangalan ng Magtatrabaho</label>
-                        <input type="text" name="worker_name" id="editworker_name" class="form-control">
-                    </div>
-                    <div class="mb-3">
-                        <label for="editsalaryperday" class="form-label">Gana sa Isang Araw</label>
-                        <input type="number" name="salaryperday" id="editsalaryperday" class="form-control">
-                    </div>
-                    <button type="submit" class="btn btn-primary">Save Changes</button>
-                </form>
-            </div>
-        </div>
     </div>
 </div>

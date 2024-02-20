@@ -12,7 +12,7 @@ class VarietyModel extends Model
     protected $returnType       = 'array';
     protected $useSoftDeletes   = false;
     protected $protectFields    = true;
-    protected $allowedFields    = ['variety_name', 'variety_price', 'quantity', 'date_bought', 'notes', 'user_id'];
+    protected $allowedFields    = ['barangay', 'equipment', 'variety_name', 'variety_price', 'quantity', 'date_bought', 'notes', 'user_id'];
 
     // Dates
     protected $useTimestamps = false;
