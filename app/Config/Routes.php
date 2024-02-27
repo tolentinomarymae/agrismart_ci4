@@ -6,7 +6,7 @@ use CodeIgniter\Router\RouteCollection;
  * @var RouteCollection $routes
  */
 $routes->get('/', 'LandingpageController::index');
-$routes->get('/dashboards', 'LoginController::dashboards', ['filter' => 'authGuard']);
+$routes->get('/dashboards', 'DashboardController::dashboards', ['filter' => 'authGuard']);
 $routes->post('/register', 'LoginController::register');
 $routes->get('/registerview', 'LoginController::registerview');
 $routes->get('/sign_ins', 'LoginController::login'); //login page ito

@@ -45,5 +45,5 @@
     <link rel="stylesheet" href="<?= base_url() ?>dashboard/css/colors/default.css" id="colorSkinCSS">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
     <script src="https://kit.fontawesome.com/5f1f084a1d.js" crossorigin="anonymous"></script>
-
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 </head>

@@ -42,75 +42,48 @@
                 <div class="white_box mb_30 ">
                     <div class="box_header border_bottom_1px  ">
                         <div class="main-title">
-                            <h3 class="mb_25">Total Income</h3>
+                            <h3 class="mb_25">Income</h3>
                         </div>
                     </div>
-                    <div class="income_servay">
-                        <div class="row">
-                            <div class="col-md-3">
-                                <div class="count_content">
-                                    <h3>P <span class="counter">305</span> </h3>
-                                    <p>Today's Income</p>
-                                </div>
-                            </div>
-                            <div class="col-md-3">
-                                <div class="count_content">
-                                    <h3>P <span class="counter">1005</span> </h3>
-                                    <p>This Week's Income</p>
-                                </div>
-                            </div>
-                            <div class="col-md-3">
-                                <div class="count_content">
-                                    <h3>P <span class="counter">5505</span> </h3>
-                                    <p>This Month's Income</p>
-                                </div>
-                            </div>
-                            <div class="col-md-3">
-                                <div class="count_content">
-                                    <h3>P <span class="counter">155615</span> </h3>
-                                    <p>This Year's Income</p>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <div id="bar_wev"></div>
-
                     <div class="my-4">
-                        <div class="title">Line Chart</div>
-                        <canvas id="revenueChart" width="400" height="300"></canvas>
+                        <canvas id="monthlyRevenueChart" width="400" height="100"></canvas>
                     </div>
+
+
                 </div>
             </div>
         </div>
     </div>
-</div><canvas id="revenueChart" width="800" height="400"></canvas>
+</div>
 
 <script>
-    var ctx = document.getElementById('revenueChart').getContext('2d');
-    var totalRevenueThisYear = <?= $totalRevenueThisYear; ?>;
+    document.addEventListener('DOMContentLoaded', function() {
+        // Monthly revenue chart
+        var monthlyLabels = <?= json_encode($monthlyLabels) ?>;
+        var monthlyData = <?= json_encode($monthlyData) ?>;
 
-    var chart = new Chart(ctx, {
-        type: 'line',
-        data: {
-            labels: totalRevenueThisYear.map(item => item.year),
-            datasets: [{
-                label: 'Total Revenue per Year',
-                data: totalRevenueThisYear.map(item => item.totalRevenueThisYear),
-                backgroundColor: 'rgba(75, 192, 192, 0.2)',
-                borderColor: 'rgba(75, 192, 192, 1)',
-                borderWidth: 1
-            }]
-        },
-        options: {
-            scales: {
-                x: {
-                    type: 'linear',
-                    position: 'bottom'
-                },
-                y: {
-                    min: 0
+        // Create a line chart for monthly revenue
+        var monthlyCtx = document.getElementById('monthlyRevenueChart').getContext('2d');
+        var monthlyLineChart = new Chart(monthlyCtx, {
+            type: 'line',
+            data: {
+                labels: monthlyLabels,
+                datasets: [{
+                    label: 'Monthly Revenue',
+                    data: monthlyData,
+                    borderColor: 'rgba(75, 192, 192, 1)',
+                    borderWidth: 2,
+                    pointBackgroundColor: 'rgba(75, 192, 192, 1)',
+
+                }]
+            },
+            options: {
+                scales: {
+                    y: {
+                        beginAtZero: true
+                    }
                 }
             }
-        }
+        });
     });
 </script>

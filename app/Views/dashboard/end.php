@@ -258,7 +258,7 @@
 <script src="<?= base_url() ?>dashboard/vendors/apex_chart/bar_active_1.js"></script>
 <script src="<?= base_url() ?>dashboard/vendors/apex_chart/apex_chart_list.js"></script>
 
-
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 <script src="<?= base_url() ?>dashboard/vendors/chartjs/chartjs_init.js"></script>
 </body>
 

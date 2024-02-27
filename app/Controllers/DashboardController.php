@@ -34,9 +34,82 @@ class DashboardController extends BaseController
         $this->prof = new \App\Models\FarmelProfileModel();
     }
 
-    //fields
+    //dashboard
+
+    public function dashboards()
+    {
+        if (!session()->get('isLoggedIn')) {
+            return redirect()->to('/logins');
+        }
+
+        $userId = session()->get('farmer_id');
+
+        $currentYear = date('Y');
 
 
+        // total na naani
+        $resultQuantity = $this->harvest
+            ->selectSum('harvest_quantity', 'totalHarvestQuantity')
+            ->where('user_id', $userId)
+            ->get();
+        $totalHarvestQuantity = $resultQuantity->getRow()->totalHarvestQuantity;
+
+
+        // kita ngayong taon
+        $resultRevenue = $this->harvest
+            ->selectSum('total_revenue', 'totalRevenueThisYear')
+            ->where('user_id', $userId)
+            ->where('YEAR(harvest_date)', $currentYear)
+            ->get();
+        $totalRevenueThisYear = $resultRevenue->getRow()->totalRevenueThisYear;
+
+        // Count of binhi
+        $totalVarieties = $this->variety
+            ->selectSum('quantity', 'totalVarieties')
+            ->where('user_id', $userId)
+            ->get();
+        $totalBinhiCount = $totalVarieties->getRow()->totalVarieties;
+
+        // Total money spent from jobs table
+        $resultMoneySpent = $this->jobs
+            ->selectSum('total_money_spent', 'totalMoneySpent')
+            ->where('user_id', $userId)
+            ->get();
+        $totalMoneySpent = $resultMoneySpent->getRow()->totalMoneySpent;
+        // Monthly revenue data
+        $monthlyRevenue = $this->harvest
+            ->select('YEAR(harvest_date) as year, MONTH(harvest_date) as month, SUM(total_revenue) as totalRevenue')
+            ->where('user_id', $userId)
+            ->groupBy('YEAR(harvest_date), MONTH(harvest_date)')
+            ->findAll();
+
+        // Extracting labels and data for the chart
+        $monthlyLabels = array_map(function ($item) {
+            return date('F Y', strtotime($item['year'] . '-' . $item['month'] . '-01'));
+        }, $monthlyRevenue);
+
+        $monthlyData = array_column($monthlyRevenue, 'totalRevenue');
+
+
+        $harvestData = $this->harvest->where('user_id', $userId)->findAll();
+        $revenueData = $this->harvest->where('user_id', $userId)->findAll();
+        $workerData = $this->worker->where('user_id', $userId)->findAll();
+
+        $data = [
+            'totalHarvestQuantity' => $totalHarvestQuantity,
+            'totalRevenueThisYear' => $totalRevenueThisYear,
+            'harvest' => $harvestData,
+            'totalBinhiCount' => $totalBinhiCount,
+            'totalMoneySpent' => $totalMoneySpent,
+            'worker' => $workerData,
+            'monthlyLabels' => $monthlyLabels,
+            'monthlyData' => $monthlyData,
+        ];
+
+        return view('userfolder/dashboard', $data);
+    }
+
+    // fields
     public function viewfields()
     {
         if (!session()->get('isLoggedIn')) {
@@ -296,9 +369,6 @@ class DashboardController extends BaseController
         if (!session()->get('isLoggedIn')) {
             return redirect()->to('/sign_ins');
         }
-        if (!session()->get('usertype') !== 'Farmer') {
-            return redirect()->to('/signinadmin');
-        }
         $data = [
             'harvest' => $this->harvest->where('user_id', $userId)->findAll()
         ];
@@ -315,6 +385,7 @@ class DashboardController extends BaseController
             'total_revenue' => 'required',
             'harvest_date' => 'required',
             'notes' => 'required',
+
         ]);
 
         if (!$validation) {
@@ -330,6 +401,7 @@ class DashboardController extends BaseController
             'harvest_date' => $this->request->getPost('harvest_date'),
             'notes' => $this->request->getPost('notes'),
             'user_id' => $userId,
+
         ]);
 
         return redirect()->to('/harvest')->with('success', 'Harvest added successfully');
@@ -382,9 +454,6 @@ class DashboardController extends BaseController
         $userId = session()->get('farmer_id');
         if (!session()->get('isLoggedIn')) {
             return redirect()->to('/sign_ins');
-        }
-        if (!session()->get('usertype') !== 'Farmer') {
-            return redirect()->to('/signinadmin');
         } else {
             $data = [
                 'worker' => $this->worker->where('user_id', $userId)->findAll()
@@ -450,9 +519,6 @@ class DashboardController extends BaseController
         $userId = session()->get('farmer_id');
         if (!session()->get('isLoggedIn')) {
             return redirect()->to('/sign_ins');
-        }
-        if (!session()->get('usertype') !== 'Farmer') {
-            return redirect()->to('/signinadmin');
         } else {
             $data = [
                 'variety' => $this->variety->where('user_id', $userId)->findAll()
@@ -494,9 +560,6 @@ class DashboardController extends BaseController
         $userId = session()->get('farmer_id');
         if (!session()->get('isLoggedIn')) {
             return redirect()->to('/sign_ins');
-        }
-        if (!session()->get('usertype') !== 'Farmer') {
-            return redirect()->to('/signinadmin');
         } else {
             $data = [
                 'fertilizers' => $this->fertilizers->where('user_id', $userId)->findAll()
@@ -535,9 +598,6 @@ class DashboardController extends BaseController
         $userId = session()->get('farmer_id');
         if (!session()->get('isLoggedIn')) {
             return redirect()->to('/sign_ins');
-        }
-        if (!session()->get('usertype') !== 'Farmer') {
-            return redirect()->to('/signinadmin');
         } else {
             $data = [
                 'equipment' => $this->equipment->where('user_id', $userId)->findAll()
@@ -667,9 +727,7 @@ class DashboardController extends BaseController
         if (!session()->get('isLoggedIn')) {
             return redirect()->to('/signinadmin');
         }
-        if (!session()->get('usertype') !== 'Admin') {
-            return redirect()->to('/sign_ins');
-        }
+
         $data = [
             'field' => $this->field->findAll()
         ];
@@ -680,9 +738,7 @@ class DashboardController extends BaseController
         if (!session()->get('isLoggedIn')) {
             return redirect()->to('/signinadmin');
         }
-        if (!session()->get('usertype') !== 'Admin') {
-            return redirect()->to('/sign_ins');
-        }
+
         $data = [
             'planting' => $this->planting->findAll()
         ];
@@ -693,9 +749,7 @@ class DashboardController extends BaseController
         if (!session()->get('isLoggedIn')) {
             return redirect()->to('/signinadmin');
         }
-        if (!session()->get('usertype') !== 'Admin') {
-            return redirect()->to('/sign_ins');
-        }
+
         $data = [
             'harvest' => $this->harvest->findAll()
         ];
@@ -706,9 +760,7 @@ class DashboardController extends BaseController
         if (!session()->get('isLoggedIn')) {
             return redirect()->to('/signinadmin');
         }
-        if (!session()->get('usertype') !== 'Admin') {
-            return redirect()->to('/sign_ins');
-        }
+
         $barangays = ['Santiago', 'Kalinisan',  'Mabini', 'Adrialuna', 'Antipolo', 'Apitong', 'Arangin', 'Aurora', 'Bacungan', 'Bagong Buhay', 'Bancuro', 'Barcenaga', 'Bayani', 'Buhangin', 'Concepcion', 'Dao', 'Del Pilar', 'Estrella', 'Evangelista', 'Gamao', 'General Esco', 'Herrera', 'Inarawan', 'Laguna', 'Mabini', 'Andres Ilagan', 'Mahabang Parang', 'Malaya', 'Malinao', 'Malvar', 'Masagana', 'Masaguing', 'Melgar A', 'Melgar B', 'Metolza', 'Montelago', 'Montemayor', 'Motoderazo', 'Mulawin', 'Nag-Iba I', 'Nag-Iba II', 'Pagkakaisa', 'Paniquian', 'Pinagsabangan I', 'Pinagsabangan II', 'Pinahan', 'Poblacion I (Barangay I)', 'Poblacion II (Barangay II)', 'Poblacion III (Barangay III)', 'Sampaguita', 'San Agustin I', 'San Agustin II', 'San Andres', 'San Antonio', 'San Carlos', 'San Isidro', 'San Jose', 'San Luis', 'San Nicolas', 'San Pedro', 'Santa Isabel', 'Santa Maria', 'Santiago', 'Santo Nino', 'Tagumpay', 'Tigkan', 'Melgar B', 'Santa Cruz', 'Balite', 'Banuton', 'Caburo', 'Magtibay', 'Paitan'];
         $varietyData = [];
 

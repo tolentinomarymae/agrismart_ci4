@@ -27,62 +27,7 @@ class LoginController extends BaseController
         $this->worker = new \App\Models\WorkerModel();
         $this->variety = new \App\Models\VarietyModel();
     }
-    public function dashboards()
-    {
-        if (!session()->get('isLoggedIn')) {
-            return redirect()->to('/logins');
-        }
 
-        $userId = session()->get('farmer_id');
-
-        $currentYear = date('Y');
-
-
-        // total na naani
-        $resultQuantity = $this->harvest
-            ->selectSum('harvest_quantity', 'totalHarvestQuantity')
-            ->where('user_id', $userId)
-            ->get();
-        $totalHarvestQuantity = $resultQuantity->getRow()->totalHarvestQuantity;
-
-
-        // kita ngayong taon
-        $resultRevenue = $this->harvest
-            ->selectSum('total_revenue', 'totalRevenueThisYear')
-            ->where('user_id', $userId)
-            ->where('YEAR(harvest_date)', $currentYear)
-            ->get();
-        $totalRevenueThisYear = $resultRevenue->getRow()->totalRevenueThisYear;
-
-        // Count of binhi
-        $totalVarieties = $this->variety
-            ->selectSum('quantity', 'totalVarieties')
-            ->where('user_id', $userId)
-            ->get();
-        $totalBinhiCount = $totalVarieties->getRow()->totalVarieties;
-
-        // Total money spent from jobs table
-        $resultMoneySpent = $this->jobs
-            ->selectSum('total_money_spent', 'totalMoneySpent')
-            ->where('user_id', $userId)
-            ->get();
-        $totalMoneySpent = $resultMoneySpent->getRow()->totalMoneySpent;
-
-        $harvestData = $this->harvest->where('user_id', $userId)->findAll();
-        $revenueData = $this->harvest->where('user_id', $userId)->findAll();
-        $workerData = $this->worker->where('user_id', $userId)->findAll();
-
-        $data = [
-            'totalHarvestQuantity' => $totalHarvestQuantity,
-            'totalRevenueThisYear' => $totalRevenueThisYear,
-            'harvest' => $harvestData,
-            'totalBinhiCount' => $totalBinhiCount,
-            'totalMoneySpent' => $totalMoneySpent,
-            'worker' => $workerData,
-        ];
-
-        return view('userfolder/dashboard', $data);
-    }
 
 
     public function register()
