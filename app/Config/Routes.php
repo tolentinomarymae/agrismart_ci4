@@ -86,3 +86,7 @@ $routes->get('/adminharvest', 'DashboardController::adminharvest');
 
 $routes->get('/map', 'DashboardController::map');
 $routes->get('/eq', 'DashboardController::eq');
+
+
+$routes->get('/maps', 'DashboardController::farmermap');
+$routes->get('/eq', 'DashboardController::eq');
